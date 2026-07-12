@@ -205,9 +205,26 @@ export default function Contact() {
                   )}
 
                   {status === "error" && (
-                    <div className="p-3.5 rounded-xl bg-red-500/10 border border-red-500/20 text-xs text-red-500 flex items-center gap-2 font-semibold">
-                      <AlertCircle className="w-4 h-4 shrink-0" />
-                      <span>Oops! Something went wrong. Please try again.</span>
+                    <div className="p-3.5 rounded-xl bg-red-500/10 border border-red-500/20 text-xs text-red-500 flex items-start gap-2 font-semibold">
+                      <AlertCircle className="w-4.5 h-4.5 shrink-0 mt-0.5" />
+                      <div>
+                        <p className="font-bold text-white">Oops! Something went wrong.</p>
+                        <p className="mt-0.5 leading-relaxed font-medium text-zinc-400">
+                          Please verify that your <code className="text-white px-1 py-0.5 rounded bg-white/5">NEXT_PUBLIC_WEB3FORMS_KEY</code> environment variable is set in Vercel settings and redeployed.
+                        </p>
+                      </div>
+                    </div>
+                  )}
+
+                  {(!process.env.NEXT_PUBLIC_WEB3FORMS_KEY || process.env.NEXT_PUBLIC_WEB3FORMS_KEY.includes("YOUR_WEB3FORMS_ACCESS_KEY")) && (
+                    <div className="p-3.5 rounded-xl bg-amber-500/10 border border-amber-500/20 text-xs text-amber-500 flex items-start gap-2 font-semibold">
+                      <AlertCircle className="w-4.5 h-4.5 shrink-0 mt-0.5" />
+                      <div>
+                        <p className="font-bold text-white">Key Configuration Required</p>
+                        <p className="mt-0.5 leading-relaxed font-medium text-zinc-400">
+                          Web3Forms is in sandbox mode. Go to <a href="https://web3forms.com" target="_blank" rel="noopener noreferrer" className="text-marigold underline">web3forms.com</a> to register your email and add the key to your Vercel project environment variables.
+                        </p>
+                      </div>
                     </div>
                   )}
 
