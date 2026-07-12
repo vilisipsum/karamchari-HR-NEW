@@ -158,11 +158,19 @@ export default function Pricing() {
 
                   <div className="mt-8 pt-4">
                     {tier.name === "Enterprise" ? (
-                      <GradientButton variant="secondary" className="w-full justify-center">
+                      <GradientButton 
+                        variant="secondary" 
+                        className="w-full justify-center"
+                        onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
+                      >
                         Contact Sales
                       </GradientButton>
                     ) : (
-                      <GradientButton variant={tier.popular ? "primary" : "secondary"} className="w-full justify-center">
+                      <GradientButton 
+                        variant={tier.popular ? "primary" : "secondary"} 
+                        className="w-full justify-center"
+                        onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
+                      >
                         Start Free Trial
                       </GradientButton>
                     )}

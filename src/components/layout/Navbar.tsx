@@ -26,6 +26,13 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const handleCTAClick = () => {
+    setIsMobileMenuOpen(false);
+    setTimeout(() => {
+      document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+    }, 150);
+  };
+
   const navLinks = [
     { label: "Features", href: "#features" },
     { label: "AI HR", href: "#ai-hr" },
@@ -62,10 +69,10 @@ export default function Navbar() {
 
           {/* Action Buttons */}
           <div className="hidden md:flex items-center gap-4">
-            <GradientButton variant="secondary">
+            <GradientButton variant="secondary" onClick={handleCTAClick}>
               Book Demo
             </GradientButton>
-            <GradientButton variant="primary" className="flex gap-1 items-center">
+            <GradientButton variant="primary" className="flex gap-1 items-center" onClick={handleCTAClick}>
               Start Free Trial <ArrowUpRight className="w-4 h-4" />
             </GradientButton>
           </div>
@@ -105,10 +112,10 @@ export default function Navbar() {
             </div>
 
             <div className="flex flex-col gap-4 mt-auto mb-12">
-              <GradientButton variant="secondary" className="w-full">
+              <GradientButton variant="secondary" className="w-full" onClick={handleCTAClick}>
                 Book Demo
               </GradientButton>
-              <GradientButton variant="primary" className="w-full flex justify-center gap-2">
+              <GradientButton variant="primary" className="w-full flex justify-center gap-2" onClick={handleCTAClick}>
                 Start Free Trial <ArrowUpRight className="w-4 h-4" />
               </GradientButton>
             </div>

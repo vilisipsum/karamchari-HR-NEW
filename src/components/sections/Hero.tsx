@@ -40,10 +40,18 @@ export default function Hero() {
 
             {/* Action buttons */}
             <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 mb-12">
-              <GradientButton variant="primary" className="w-full sm:w-auto flex items-center justify-center gap-2">
+              <GradientButton 
+                variant="primary" 
+                className="w-full sm:w-auto flex items-center justify-center gap-2"
+                onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
+              >
                 Start Free Trial <ArrowUpRight className="w-4 h-4" />
               </GradientButton>
-              <GradientButton variant="secondary" className="w-full sm:w-auto flex items-center justify-center gap-2">
+              <GradientButton 
+                variant="secondary" 
+                className="w-full sm:w-auto flex items-center justify-center gap-2"
+                onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
+              >
                 <Play className="w-4 h-4 text-gulal-rose fill-gulal-rose" /> Book Demo
               </GradientButton>
             </div>
