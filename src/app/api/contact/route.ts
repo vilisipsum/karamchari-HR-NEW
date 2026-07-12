@@ -18,11 +18,14 @@ export async function POST(req: Request) {
       );
     }
 
+    // Strip spaces to ensure Google accepts the 16-character key
+    const cleanPass = smtpPass.replace(/\s+/g, "");
+
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
         user: smtpUser,
-        pass: smtpPass, // Gmail App Password
+        pass: cleanPass,
       },
     });
 
