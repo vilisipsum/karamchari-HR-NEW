@@ -453,7 +453,7 @@ export default function DashboardShowcase() {
                     <div className="flex justify-between items-center border-b border-zinc-200 dark:border-zinc-800/80 pb-3">
                       <div>
                         <h4 className="text-sm font-extrabold tracking-tight">KaramcharHR Demo Corp</h4>
-                        <span className="text-[8px] text-zinc-500">Regd. Office: BKC, Mumbai (MH)</span>
+                        <span className="text-[8px] text-zinc-500">Regd. Office: Sec 62, Noida, India</span>
                       </div>
                       <span className="px-3 py-1 rounded bg-indigo/10 dark:bg-white/5 text-[9px] font-bold text-indigo dark:text-zinc-300">
                         June 2026 Payslip

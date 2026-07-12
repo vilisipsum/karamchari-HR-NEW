@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import GlassCard from "../ui/GlassCard";
 import SectionReveal from "../ui/SectionReveal";
 import GradientButton from "../ui/GradientButton";
-import { MessageSquare, PhoneCall, Mail, MapPin } from "lucide-react";
+import { MessageSquare, PhoneCall, Mail, MapPin, Sparkles, CheckCircle2, AlertCircle } from "lucide-react";
 
 export default function Contact() {
   const [form, setForm] = useState({
@@ -15,9 +15,50 @@ export default function Contact() {
     message: "",
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    alert(`Thank you ${form.name}. Our HR specialist will reach out within 2 hours!`);
+    setStatus("sending");
+
+    try {
+      // Form submission sent via Web3Forms direct connection
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          // Swap with your Web3Forms access key from web3forms.com
+          access_key: process.env.NEXT_PUBLIC_WEB3FORMS_KEY || "YOUR_WEB3FORMS_ACCESS_KEY_HERE",
+          subject: "New Demo Booking Request - KaramcharHR",
+          from_name: "KaramcharHR Website",
+          to_email: "karamcharhr@gmail.com",
+          name: form.name,
+          email: form.email,
+          phone: form.phone,
+          companySize: form.companySize,
+          message: form.message,
+        }),
+      });
+
+      const data = await response.json();
+      if (data.success || data.status === 200) {
+        setStatus("success");
+        setForm({
+          name: "",
+          email: "",
+          companySize: "10-50",
+          phone: "",
+          message: "",
+        });
+      } else {
+        setStatus("error");
+      }
+    } catch (err) {
+      setStatus("error");
+    }
   };
 
   return (
@@ -48,12 +89,12 @@ export default function Contact() {
                   <div>
                     <span className="text-[10px] text-zinc-400 font-bold uppercase">WhatsApp Quick Connect</span>
                     <a
-                      href="https://wa.me/919999999999?text=Interested%20in%20KaramcharHR%20Demo"
+                      href="https://wa.me/917017813285?text=Interested%20in%20KaramcharHR%20Demo"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-sm font-bold text-foreground dark:text-white hover:text-gulal-rose block transition-colors mt-0.5"
                     >
-                      +91 99999 99999
+                      +91 70178 13285
                     </a>
                   </div>
                 </div>
@@ -80,7 +121,7 @@ export default function Contact() {
                   <div>
                     <span className="text-[10px] text-zinc-400 font-bold uppercase">HQ Office Hub</span>
                     <p className="text-xs font-semibold text-zinc-600 dark:text-zinc-300 mt-0.5">
-                      BKC Bandra, Mumbai, MH - 400051
+                      Sec 62 Noida, India
                     </p>
                   </div>
                 </div>
@@ -156,8 +197,27 @@ export default function Contact() {
                     />
                   </div>
 
-                  <GradientButton type="submit" variant="primary" className="w-full justify-center py-3.5">
-                    Book My Demo Walkthrough
+                  {status === "success" && (
+                    <div className="p-3.5 rounded-xl bg-green-500/10 border border-green-500/20 text-xs text-[#1A8A70] dark:text-mint-teal flex items-center gap-2 font-semibold">
+                      <CheckCircle2 className="w-4 h-4 shrink-0" />
+                      <span>Demo request submitted! We will email you details shortly.</span>
+                    </div>
+                  )}
+
+                  {status === "error" && (
+                    <div className="p-3.5 rounded-xl bg-red-500/10 border border-red-500/20 text-xs text-red-500 flex items-center gap-2 font-semibold">
+                      <AlertCircle className="w-4 h-4 shrink-0" />
+                      <span>Oops! Something went wrong. Please try again.</span>
+                    </div>
+                  )}
+
+                  <GradientButton 
+                    type="submit" 
+                    variant="primary" 
+                    className="w-full justify-center py-3.5"
+                    disabled={status === "sending"}
+                  >
+                    {status === "sending" ? "Sending Request..." : "Book My Demo Walkthrough"}
                   </GradientButton>
                 </form>
               </GlassCard>
