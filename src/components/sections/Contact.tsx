@@ -16,35 +16,26 @@ export default function Contact() {
   });
 
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+  const [errorDetail, setErrorDetail] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus("sending");
+    setErrorDetail(null);
 
     try {
-      // Form submission sent via Web3Forms direct connection
-      const response = await fetch("https://api.web3forms.com/submit", {
+      // Local self-sufficient API submission
+      const response = await fetch("/api/contact", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Accept: "application/json",
         },
-        body: JSON.stringify({
-          // Swap with your Web3Forms access key from web3forms.com
-          access_key: process.env.NEXT_PUBLIC_WEB3FORMS_KEY || "YOUR_WEB3FORMS_ACCESS_KEY_HERE",
-          subject: "New Demo Booking Request - KaramcharHR",
-          from_name: "KaramcharHR Website",
-          to_email: "karamcharhr@gmail.com",
-          name: form.name,
-          email: form.email,
-          phone: form.phone,
-          companySize: form.companySize,
-          message: form.message,
-        }),
+        body: JSON.stringify(form),
       });
 
       const data = await response.json();
-      if (data.success || data.status === 200) {
+      
+      if (response.ok && data.success) {
         setStatus("success");
         setForm({
           name: "",
@@ -55,9 +46,11 @@ export default function Contact() {
         });
       } else {
         setStatus("error");
+        setErrorDetail(data.code === "MISSING_CREDENTIALS" ? "SMTP_CONFIG_MISSING" : data.error || "UNKNOWN_ERROR");
       }
     } catch (err) {
       setStatus("error");
+      setErrorDetail("NETWORK_ERROR");
     }
   };
 
@@ -208,22 +201,16 @@ export default function Contact() {
                     <div className="p-3.5 rounded-xl bg-red-500/10 border border-red-500/20 text-xs text-red-500 flex items-start gap-2 font-semibold">
                       <AlertCircle className="w-4.5 h-4.5 shrink-0 mt-0.5" />
                       <div>
-                        <p className="font-bold text-white">Oops! Something went wrong.</p>
-                        <p className="mt-0.5 leading-relaxed font-medium text-zinc-400">
-                          Please verify that your <code className="text-white px-1 py-0.5 rounded bg-white/5">NEXT_PUBLIC_WEB3FORMS_KEY</code> environment variable is set in Vercel settings and redeployed.
-                        </p>
-                      </div>
-                    </div>
-                  )}
-
-                  {(!process.env.NEXT_PUBLIC_WEB3FORMS_KEY || process.env.NEXT_PUBLIC_WEB3FORMS_KEY.includes("YOUR_WEB3FORMS_ACCESS_KEY")) && (
-                    <div className="p-3.5 rounded-xl bg-amber-500/10 border border-amber-500/20 text-xs text-amber-500 flex items-start gap-2 font-semibold">
-                      <AlertCircle className="w-4.5 h-4.5 shrink-0 mt-0.5" />
-                      <div>
-                        <p className="font-bold text-white">Key Configuration Required</p>
-                        <p className="mt-0.5 leading-relaxed font-medium text-zinc-400">
-                          Web3Forms is in sandbox mode. Go to <a href="https://web3forms.com" target="_blank" rel="noopener noreferrer" className="text-marigold underline">web3forms.com</a> to register your email and add the key to your Vercel project environment variables.
-                        </p>
+                        <p className="font-bold text-white">Oops! Submission Failed.</p>
+                        {errorDetail === "SMTP_CONFIG_MISSING" ? (
+                          <p className="mt-0.5 leading-relaxed font-medium text-zinc-400">
+                            The server's SMTP mail settings are not configured. Please add the <code className="text-white px-1 py-0.5 rounded bg-white/5">SMTP_PASS</code> variable to your environment configuration.
+                          </p>
+                        ) : (
+                          <p className="mt-0.5 leading-relaxed font-medium text-zinc-400">
+                            Failed to deliver the mail payload. Details: <code className="text-white px-1 py-0.5 rounded bg-white/5">{errorDetail}</code>
+                          </p>
+                        )}
                       </div>
                     </div>
                   )}
