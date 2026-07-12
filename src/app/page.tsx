@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import Navbar from "../components/layout/Navbar";
 import AnimatedBlobs from "../components/ui/AnimatedBlobs";
 import Hero from "../components/sections/Hero";
@@ -14,8 +16,11 @@ import Pricing from "../components/sections/Pricing";
 import FAQ from "../components/sections/FAQ";
 import Contact from "../components/sections/Contact";
 import Footer from "../components/layout/Footer";
+import DynamicDrawer from "../components/ui/DynamicDrawer";
 
 export default function Home() {
+  const [activeDrawer, setActiveDrawer] = useState<string | null>(null);
+
   return (
     <div className="relative w-full min-h-screen">
       {/* Background Animated Gradients */}
@@ -41,7 +46,10 @@ export default function Home() {
       </main>
 
       {/* Footer */}
-      <Footer />
+      <Footer onOpenDrawer={setActiveDrawer} />
+
+      {/* Dynamic Slide-out Drawer Panel */}
+      <DynamicDrawer contentId={activeDrawer} onClose={() => setActiveDrawer(null)} />
     </div>
   );
 }

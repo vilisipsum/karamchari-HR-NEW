@@ -5,7 +5,11 @@ import InteractiveLogo from "../ui/InteractiveLogo";
 import { ArrowRight } from "lucide-react";
 import GradientButton from "../ui/GradientButton";
 
-export default function Footer() {
+interface FooterProps {
+  onOpenDrawer: (id: string) => void;
+}
+
+export default function Footer({ onOpenDrawer }: FooterProps) {
   return (
     <footer className="relative mt-24 border-t border-white/10 bg-bg-light/40 dark:bg-bg-dark/40 backdrop-blur-md pt-16 pb-8">
       {/* Decorative Gradient Background behind footer */}
@@ -44,36 +48,36 @@ export default function Footer() {
         <div className="flex flex-col gap-3">
           <h4 className="font-heading font-bold text-xs uppercase tracking-widest text-zinc-400 dark:text-zinc-500">Modules</h4>
           <ul className="flex flex-col gap-2.5 text-sm text-zinc-600 dark:text-zinc-400 font-medium">
-            <li><a href="#" className="hover:text-gulal-rose transition-colors">Core HR & Directory</a></li>
-            <li><a href="#" className="hover:text-gulal-rose transition-colors">Indian Payroll (₹)</a></li>
-            <li><a href="#" className="hover:text-gulal-rose transition-colors">Smart Attendance</a></li>
-            <li><a href="#" className="hover:text-gulal-rose transition-colors">AI Recruitment</a></li>
-            <li><a href="#" className="hover:text-gulal-rose transition-colors">Performance & OKRs</a></li>
+            <li><a href="#features" className="hover:text-gulal-rose transition-colors">Core HR & Directory</a></li>
+            <li><a href="#showcase" className="hover:text-gulal-rose transition-colors">Indian Payroll (₹)</a></li>
+            <li><a href="#showcase" className="hover:text-gulal-rose transition-colors">Smart Attendance</a></li>
+            <li><a href="#ai-hr" className="hover:text-gulal-rose transition-colors">AI Recruitment</a></li>
+            <li><a href="#features" className="hover:text-gulal-rose transition-colors">Performance & OKRs</a></li>
           </ul>
         </div>
 
         {/* Company Column */}
         <div className="flex flex-col gap-3">
           <h4 className="font-heading font-bold text-xs uppercase tracking-widest text-zinc-400 dark:text-zinc-500">Company</h4>
-          <ul className="flex flex-col gap-2.5 text-sm text-zinc-600 dark:text-zinc-400 font-medium">
-            <li><a href="#" className="hover:text-gulal-rose transition-colors">About Us</a></li>
-            <li><a href="#" className="hover:text-gulal-rose transition-colors">Careers</a></li>
-            <li><a href="#" className="hover:text-gulal-rose transition-colors">Press Kit</a></li>
-            <li><a href="#" className="hover:text-gulal-rose transition-colors">Contact Support</a></li>
-            <li><a href="#" className="hover:text-gulal-rose transition-colors">Trust Center</a></li>
-          </ul>
+          <div className="flex flex-col gap-2.5 text-sm text-zinc-600 dark:text-zinc-400 font-medium items-start">
+            <button onClick={() => onOpenDrawer("about-us")} className="hover:text-gulal-rose transition-colors cursor-pointer text-left">About Us</button>
+            <button onClick={() => onOpenDrawer("careers")} className="hover:text-gulal-rose transition-colors cursor-pointer text-left">Careers</button>
+            <button onClick={() => onOpenDrawer("press-kit")} className="hover:text-gulal-rose transition-colors cursor-pointer text-left">Press Kit</button>
+            <button onClick={() => onOpenDrawer("support")} className="hover:text-gulal-rose transition-colors cursor-pointer text-left">Contact Support</button>
+            <button onClick={() => onOpenDrawer("trust")} className="hover:text-gulal-rose transition-colors cursor-pointer text-left">Trust Center</button>
+          </div>
         </div>
 
         {/* Resources Column */}
         <div className="flex flex-col gap-3">
           <h4 className="font-heading font-bold text-xs uppercase tracking-widest text-zinc-400 dark:text-zinc-500">Resources</h4>
-          <ul className="flex flex-col gap-2.5 text-sm text-zinc-600 dark:text-zinc-400 font-medium">
-            <li><a href="#" className="hover:text-gulal-rose transition-colors">HR Glossary (India)</a></li>
-            <li><a href="#" className="hover:text-gulal-rose transition-colors">EPF & ESI Calculator</a></li>
-            <li><a href="#" className="hover:text-gulal-rose transition-colors">Slab Tax Calculator</a></li>
-            <li><a href="#" className="hover:text-gulal-rose transition-colors">Developer API</a></li>
-            <li><a href="#" className="hover:text-gulal-rose transition-colors">System Status</a></li>
-          </ul>
+          <div className="flex flex-col gap-2.5 text-sm text-zinc-600 dark:text-zinc-400 font-medium items-start">
+            <button onClick={() => onOpenDrawer("hr-glossary")} className="hover:text-gulal-rose transition-colors cursor-pointer text-left">HR Glossary (India)</button>
+            <button onClick={() => onOpenDrawer("epf-esi-calc")} className="hover:text-gulal-rose transition-colors cursor-pointer text-left">EPF & ESI Calculator</button>
+            <button onClick={() => onOpenDrawer("slab-tax-calc")} className="hover:text-gulal-rose transition-colors cursor-pointer text-left">Slab Tax Calculator</button>
+            <button onClick={() => onOpenDrawer("developer-api")} className="hover:text-gulal-rose transition-colors cursor-pointer text-left">Developer API</button>
+            <button onClick={() => onOpenDrawer("system-status")} className="hover:text-gulal-rose transition-colors cursor-pointer text-left">System Status</button>
+          </div>
         </div>
 
         {/* Newsletter Column */}
@@ -95,10 +99,19 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 mt-16 pt-8 border-t border-zinc-200 dark:border-zinc-800 flex flex-col md:flex-row items-center justify-between gap-4">
-        <p className="text-xs text-zinc-500 font-medium">
-          © {new Date().getFullYear()} KaramcharHR (karamcharhr.online). All rights reserved.
-        </p>
+      <div className="max-w-7xl mx-auto px-6 mt-16 pt-8 border-t border-zinc-200 dark:border-zinc-800 flex flex-col md:flex-row items-center justify-between gap-6">
+        <div className="flex flex-col md:flex-row items-center gap-2 md:gap-6">
+          <p className="text-xs text-zinc-500 font-medium">
+            © {new Date().getFullYear()} KaramcharHR (karamcharhr.online). All rights reserved.
+          </p>
+          <div className="flex gap-3 text-xs text-zinc-500 font-medium">
+            <button onClick={() => onOpenDrawer("terms")} className="hover:text-gulal-rose cursor-pointer transition-colors">Terms & Conditions</button>
+            <span>•</span>
+            <button onClick={() => onOpenDrawer("privacy")} className="hover:text-gulal-rose cursor-pointer transition-colors">Privacy Policy</button>
+            <span>•</span>
+            <button onClick={() => onOpenDrawer("cookies")} className="hover:text-gulal-rose cursor-pointer transition-colors">Cookie Policy</button>
+          </div>
+        </div>
         <p className="text-xs text-zinc-500 flex items-center gap-1 font-medium">
           Made with ❤️ in India for the global workforce.
         </p>
