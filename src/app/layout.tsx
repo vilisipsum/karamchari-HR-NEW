@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Sora, Inter, JetBrains_Mono, Noto_Sans_Devanagari } from "next/font/google";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
 
 const sora = Sora({
@@ -44,6 +45,7 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col font-body bg-bg-light dark:bg-bg-dark text-foreground">
         {children}
+        <SpeedInsights />
       </body>
     </html>
   );
