@@ -23,60 +23,70 @@ export default function Modules() {
       desc: "One central hub for headcounts, attrition, payroll disbursement status, and task lists.",
       icon: LayoutDashboard,
       features: ["Real-time widgets", "To-do checklists", "Critical compliance alerts"],
+      color: "text-blue-500 bg-blue-500/10 border-blue-500/20 shadow-[0_0_15px_rgba(59,130,246,0.15)]",
     },
     {
       title: "Core HR & Directory",
       desc: "Maintain profiles, reporting structure, custom fields, and employee document vault.",
       icon: Users,
       features: ["Org chart visualization", "Secure document locker", "Asset trackers"],
+      color: "text-cyan-500 bg-cyan-500/10 border-cyan-500/20 shadow-[0_0_15px_rgba(6,182,212,0.15)]",
     },
     {
       title: "Indian Payroll (₹)",
       desc: "100% compliant automatic payroll with EPF, ESIC, Professional Tax, and TDS calculations.",
       icon: Banknote,
       features: ["One-click payslips", "Auto tax declarations", "Form 16 generation"],
+      color: "text-rose-500 bg-rose-500/10 border-rose-500/20 shadow-[0_0_15px_rgba(244,63,94,0.15)]",
     },
     {
       title: "Attendance & Rotations",
       desc: "Capture geofenced attendance, rotate schedules, and calculate accurate overtime hours.",
       icon: CalendarCheck,
       features: ["Biometric scanner sync", "Rotational roster builders", "Shift allowance"],
+      color: "text-emerald-500 bg-emerald-500/10 border-emerald-500/20 shadow-[0_0_15px_rgba(16,185,129,0.15)]",
     },
     {
       title: "Recruitment Kanban",
       desc: "Source candidates, run resume parsers, and manage interviews using intuitive boards.",
       icon: SearchCode,
       features: ["Custom pipelines", "Automated interview booking", "SLA tracking"],
+      color: "text-amber-500 bg-amber-500/10 border-amber-500/20 shadow-[0_0_15px_rgba(245,158,11,0.15)]",
     },
     {
       title: "Performance & Appraisals",
       desc: "Run 360-degree reviews, track business OKRs, and gather continuous feedback.",
       icon: LineChart,
       features: ["Flexible review templates", "OKR alignment maps", "9-box grid matrix"],
+      color: "text-emerald-500 bg-emerald-500/10 border-emerald-500/20 shadow-[0_0_15px_rgba(16,185,129,0.15)]",
     },
     {
       title: "Learning Management (LMS)",
       desc: "Deploy custom courses, track employee training, and reward completion certifications.",
       icon: GraduationCap,
       features: ["Video course players", "Interactive quiz modules", "Skill path tracking"],
+      color: "text-blue-500 bg-blue-500/10 border-blue-500/20 shadow-[0_0_15px_rgba(59,130,246,0.15)]",
     },
     {
       title: "Employee Self Service",
       desc: "Enable employees to download payslips, submit expenses, and declare taxes independently.",
       icon: FolderLock,
       features: ["Tax declaration declarations", "Expense claim snapping", "Leave applications"],
+      color: "text-indigo-500 bg-indigo-500/10 border-indigo-500/20 shadow-[0_0_15px_rgba(99,102,241,0.15)]",
     },
     {
       title: "Employee Mobile App",
       desc: "Android and iOS applications for check-in, leave requests, and payslip downloads.",
       icon: Smartphone,
       features: ["Offline geofencing", "Face ID login support", "Push notifications"],
+      color: "text-cyan-500 bg-cyan-500/10 border-cyan-500/20 shadow-[0_0_15px_rgba(6,182,212,0.15)]",
     },
     {
       title: "AI Reports & Analytics",
       desc: "Get deep metrics on hiring duration, employee costs, retention risk, and demographic diversity.",
       icon: PieChart,
       features: ["Custom query reports", "Auto csv export", "Predictive insights"],
+      color: "text-indigo-500 bg-indigo-500/10 border-indigo-500/20 shadow-[0_0_15px_rgba(99,102,241,0.15)]",
     },
   ];
 
@@ -110,7 +120,7 @@ export default function Modules() {
               >
                 <GlassCard className="p-6 md:p-8 h-full flex flex-col md:flex-row gap-6 hover:border-gulal-rose/30 dark:hover:border-gulal-rose/20 transition-all duration-300 group" hoverShimmer>
                   {/* Module Icon and Color block */}
-                  <div className="p-4 rounded-2xl bg-indigo/10 text-indigo dark:bg-white/5 dark:text-marigold h-fit w-fit shrink-0 group-hover:scale-110 transition-transform duration-300">
+                  <div className={`p-4 rounded-2xl h-fit w-fit shrink-0 group-hover:scale-110 transition-transform duration-300 ${mod.color}`}>
                     <Icon className="w-6 h-6" />
                   </div>
 

@@ -149,7 +149,7 @@ export default function Features() {
                 delay={index * 0.05}
               >
                 <GlassCard className="p-6 h-full flex flex-col gap-4 hover:-translate-y-1 hover:border-gulal-rose/30 dark:hover:border-gulal-rose/20 transition-all duration-300">
-                  <div className={`p-3 rounded-xl w-fit ${feat.color}`}>
+                  <div className={`p-3 rounded-xl w-fit border border-current/20 shadow-sm ${feat.color}`}>
                     <Icon className="w-5 h-5" />
                   </div>
                   <div>
