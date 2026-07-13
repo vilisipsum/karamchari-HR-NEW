@@ -12,28 +12,28 @@ export default function Pricing() {
   const tiers = [
     {
       name: "Starter",
-      desc: "For small teams looking to automate attendance & basic payroll.",
-      priceMonthly: 59,
-      priceAnnual: 49,
+      desc: "For small teams looking to automate attendance & basic payroll with AI assistance.",
+      priceMonthly: 299,
+      priceAnnual: 249,
       features: [
         "Core Directory (up to 50 employees)",
         "Geofenced Mobile Punch-in/out",
-        "Basic Indian Payroll calculations",
-        "Standard CL/SL Leave trackers",
-        "Email Support",
+        "AI-powered Indian Payroll calculations",
+        "Smart CL/SL Leave trackers",
+        "Email & Chat Support",
       ],
       popular: false,
     },
     {
       name: "Growth",
-      desc: "Perfect for scaling startups needing AI features and deep automation.",
-      priceMonthly: 119,
-      priceAnnual: 99,
+      desc: "Perfect for scaling startups needing advanced AI features and deep automation.",
+      priceMonthly: 599,
+      priceAnnual: 499,
       features: [
         "Directory (unlimited employees)",
         "Biometric Scanner integration",
         "Automatic Tax declarations (TDS)",
-        "AI Leave analytics warning",
+        "AI Leave analytics & burnout warnings",
         "Kanban Recruitment boards",
         "LMS Custom Course setup",
         "WhatsApp Payslip updates",
@@ -71,7 +71,7 @@ export default function Pricing() {
             Simple pricing, built to scale
           </h2>
           <p className="text-sm text-zinc-500 dark:text-zinc-400 mt-4">
-            Pay only for the active employees you manage. No hidden setup fees or long term locked commitments.
+            Pay only for the active employees you manage. AI features included in every plan. No hidden setup fees.
           </p>
         </SectionReveal>
 
