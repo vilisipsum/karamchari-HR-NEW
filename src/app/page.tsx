@@ -1,5 +1,6 @@
 "use client";
 
+// Triggering production rebuild to sync Vercel environment variables
 import React, { useState } from "react";
 import Navbar from "../components/layout/Navbar";
 import AnimatedBlobs from "../components/ui/AnimatedBlobs";
