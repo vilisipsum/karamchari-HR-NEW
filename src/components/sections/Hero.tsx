@@ -57,7 +57,7 @@ export default function Hero() {
             </div>
 
             {/* Trust Badges */}
-            <div className="grid grid-cols-3 gap-6 max-w-md mx-auto lg:mx-0 border-t border-zinc-200 dark:border-zinc-800/80 pt-8">
+            <div className="grid grid-cols-3 gap-3 sm:gap-6 max-w-md mx-auto lg:mx-0 border-t border-zinc-200 dark:border-zinc-800/80 pt-8">
               <div>
                 <h4 className="text-2xl font-bold font-heading text-indigo dark:text-marigold">
                   <AnimatedCounter value={500} suffix="+" />
@@ -128,7 +128,7 @@ export default function Hero() {
 
             {/* Floating Element 1: Employee Check In */}
             <motion.div
-              className="absolute -top-4 -left-2 w-[190px] z-20"
+              className="hidden sm:flex absolute -top-4 -left-2 w-[190px] z-20"
               animate={{ y: [0, -8, 0] }}
               transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }}
             >
@@ -145,7 +145,7 @@ export default function Hero() {
 
             {/* Floating Element 2: Indian Payroll Disbursed */}
             <motion.div
-              className="absolute -bottom-6 right-2 w-[210px] z-20"
+              className="hidden sm:flex absolute -bottom-6 right-2 w-[210px] z-20"
               animate={{ y: [0, 8, 0] }}
               transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
             >
@@ -162,7 +162,7 @@ export default function Hero() {
 
             {/* Floating Element 3: AI Copilot Tip */}
             <motion.div
-              className="absolute top-1/2 -right-12 w-[200px] z-20"
+              className="hidden lg:flex absolute top-1/2 -right-12 w-[200px] z-20"
               animate={{ x: [0, -6, 0] }}
               transition={{ repeat: Infinity, duration: 5.5, ease: "easeInOut" }}
             >
@@ -179,7 +179,7 @@ export default function Hero() {
 
             {/* Floating Element 4: Compliance Badge */}
             <motion.div
-              className="absolute -bottom-2 -left-6 z-20"
+              className="hidden sm:flex absolute -bottom-2 -left-6 z-20"
               animate={{ scale: [1, 1.03, 1] }}
               transition={{ repeat: Infinity, duration: 4.5, ease: "easeInOut" }}
             >

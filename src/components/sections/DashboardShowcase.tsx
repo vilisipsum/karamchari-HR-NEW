@@ -64,7 +64,7 @@ export default function DashboardShowcase() {
         </div>
 
         {/* Mockup Display Box */}
-        <GlassCard className="w-full aspect-[16/9] min-h-[480px] p-6 flex flex-col justify-between overflow-hidden shadow-2xl relative" hoverShimmer>
+        <GlassCard className="w-full h-auto lg:aspect-[16/9] min-h-[480px] p-4 sm:p-6 flex flex-col justify-between overflow-hidden shadow-2xl relative" hoverShimmer>
           {/* Top fake bar */}
           <div className="flex items-center justify-between border-b border-zinc-200 dark:border-zinc-800/80 pb-4 mb-4">
             <div className="flex items-center gap-4">
@@ -87,7 +87,8 @@ export default function DashboardShowcase() {
             </div>
           </div>
 
-          <div className="flex-1 overflow-y-auto pr-1">
+          <div className="flex-1 overflow-x-auto overflow-y-auto pr-1 no-scrollbar">
+            <div className="min-w-[780px] lg:min-w-0 h-full flex flex-col justify-between">
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeTab}
@@ -489,6 +490,7 @@ export default function DashboardShowcase() {
                 )}
               </motion.div>
             </AnimatePresence>
+            </div>
           </div>
         </GlassCard>
       </div>

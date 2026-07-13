@@ -59,7 +59,7 @@ export default function InteractiveLogo() {
       </div>
 
       {/* Brand Name Text */}
-      <div className="flex flex-col">
+      <div className="flex flex-col whitespace-nowrap">
         <div className="flex items-baseline">
           <span className="font-heading font-extrabold text-xl tracking-tight bg-gradient-to-r from-indigo to-[#2A2050] dark:from-white dark:to-zinc-300 bg-clip-text text-transparent">
             Karamchar
