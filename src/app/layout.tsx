@@ -29,22 +29,28 @@ const devanagari = Noto_Sans_Devanagari({
 
 export const metadata: Metadata = {
   title: {
-    default: "KaramcharHR | India's AI-Powered HRMS Platform",
+    default: "KaramcharHR | Best HRMS Software for Startups in India",
     template: "%s | KaramcharHR"
   },
-  description: "Next-gen Employee-first HRMS platform for Indian businesses. Automated payroll with tax deductions, geo-fenced attendance, AI resume screening, Leave management (CL/SL/EL), and statutory compliance (PF/ESI/PT/TDS).",
+  description: "Affordable cloud-based HRMS platform and employee-first HR software in India. Automate Indian payroll with EPF, ESIC, PT, and TDS compliance. Includes real-time attendance tracking, leaves management, and AI-powered recruitment tools.",
   keywords: [
-    "HRMS India",
-    "Payroll Software India",
-    "Attendance Tracker with GPS",
-    "Statutory Compliance India",
-    "Employee Leave Management",
-    "AI Resume Screening",
-    "Indian HR Payroll System",
-    "PF ESI compliance tool",
-    "Karamchar HRMS",
-    "HR Portal India",
-    "Performance Appraisal Software"
+    "best HRMS software for startups in India",
+    "employee-first HR software India",
+    "HR portal for Indian SMEs",
+    "affordable HRMS platform India",
+    "cloud-based HR management system India",
+    "best payroll software for small business India",
+    "automated payroll with EPF ESIC compliance",
+    "Indian statutory compliance software TDS PT",
+    "real-time employee attendance tracking portal",
+    "AI resume screening and candidate ranking tool",
+    "AI-powered HR copilot assistant",
+    "leaves and holiday management system India",
+    "employee self-service (ESS) portal online",
+    "how to process payroll with TDS deduction India",
+    "employer guide to EPF and ESIC registration",
+    "latest professional tax rates in India by state",
+    "simplifying payroll compliance for Indian startups"
   ],
   authors: [{ name: "KaramcharHR Team", url: "https://karamcharhr.online" }],
   creator: "KaramcharHR",
@@ -64,8 +70,8 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_IN",
     url: "https://karamcharhr.online",
-    title: "KaramcharHR | India's AI-Powered HRMS Platform",
-    description: "Manage payroll, attendance, recruitment, leave, performance and employee experience from one intelligent cloud platform. Built for Indian enterprises with ₹ currency, regional holidays, CL/SL/EL, and automated compliance.",
+    title: "KaramcharHR | Best HRMS Software for Startups in India",
+    description: "Affordable cloud-based HRMS platform and employee-first HR software in India. Automate Indian payroll with EPF, ESIC, PT, and TDS compliance. Includes real-time attendance tracking, leaves management, and AI-powered recruitment tools.",
     siteName: "KaramcharHR",
     images: [
       {
@@ -78,8 +84,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "KaramcharHR | India's AI-Powered HRMS Platform",
-    description: "Built for Indian enterprises with ₹ currency, regional holidays, CL/SL/EL, and automated compliance.",
+    title: "KaramcharHR | Best HRMS Software for Startups in India",
+    description: "Affordable cloud-based HRMS platform and employee-first HR software in India. Automate Indian payroll with EPF, ESIC, PT, and TDS compliance. Includes real-time attendance tracking, leaves management, and AI-powered recruitment tools.",
     images: ["https://karamcharhr.online/next.svg"],
   },
   alternates: {
