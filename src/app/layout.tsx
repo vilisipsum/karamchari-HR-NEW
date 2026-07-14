@@ -1,9 +1,15 @@
 import type { Metadata } from "next";
-import { Sora, Inter, JetBrains_Mono, Noto_Sans_Devanagari } from "next/font/google";
+import { Sora, Inter, JetBrains_Mono, Noto_Sans_Devanagari, Plus_Jakarta_Sans } from "next/font/google";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
 
 const sora = Sora({
+  subsets: ["latin"],
+  variable: "--font-display",
+  weight: ["300", "400", "500", "600", "700", "800"],
+});
+
+const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
   variable: "--font-heading",
   weight: ["300", "400", "500", "600", "700", "800"],
@@ -110,7 +116,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${sora.variable} ${inter.variable} ${jetbrainsMono.variable} ${devanagari.variable} h-full antialiased dark`}
+      className={`${sora.variable} ${plusJakartaSans.variable} ${inter.variable} ${jetbrainsMono.variable} ${devanagari.variable} h-full antialiased`}
     >
       <head>
         <script
@@ -142,7 +148,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="min-h-full flex flex-col font-body bg-bg-light dark:bg-bg-dark text-foreground">
+      <body className="min-h-full flex flex-col font-body bg-[#F8FAFC] text-slate-900 selection:bg-indigo-100">
         {children}
         <SpeedInsights />
       </body>
