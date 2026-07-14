@@ -1,14 +1,12 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import GlassCard from "../ui/GlassCard";
 import SectionReveal from "../ui/SectionReveal";
-import Image from "next/image";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   Clock,
-  CreditCard,
   CalendarRange,
-  UserPlus,
   Briefcase,
   UserCheck,
   Award,
@@ -17,13 +15,40 @@ import {
   Receipt,
   Network,
   ShieldCheck,
-  BarChart3,
   Sparkles,
   RefreshCw,
   Grid3X3,
+  Search,
 } from "lucide-react";
 
 export default function Features() {
+  // Interactive bento states
+  const [activeCandidate, setActiveCandidate] = useState<number | null>(null);
+  const [isCheckedIn, setIsCheckedIn] = useState(false);
+  const [hoveredDoc, setHoveredDoc] = useState<string | null>(null);
+  const [selectedState, setSelectedState] = useState<"MH" | "KA" | "TN">("MH");
+
+  const candidates = [
+    { name: "Rohit Sharma", role: "Frontend Dev", match: 94, skills: ["React", "Tailwind", "NextJS"] },
+    { name: "Ananya Iyer", role: "HR Manager", match: 89, skills: ["Sourcing", "Payroll", "Appraisals"] },
+  ];
+
+  const ptSlabs = {
+    MH: [
+      { min: 0, max: 7500, pt: 0 },
+      { min: 7501, max: 10000, pt: 175 },
+      { min: 10001, max: "No limit", pt: 200 },
+    ],
+    KA: [
+      { min: 0, max: 15000, pt: 0 },
+      { min: 15001, max: "No limit", pt: 200 },
+    ],
+    TN: [
+      { min: 0, max: 12000, pt: 0 },
+      { min: 12001, max: "No limit", pt: 200 },
+    ],
+  };
+
   const secondaryFeatures = [
     { title: "Leave Planner", desc: "SL, CL, EL, maternity, and custom policy limits.", icon: CalendarRange, color: "text-rose-500 bg-rose-50" },
     { title: "Digital Onboarding", desc: "Collect PAN/Aadhaar details and track checklist completion.", icon: Briefcase, color: "text-amber-600 bg-amber-50" },
@@ -44,7 +69,7 @@ export default function Features() {
           <span className="text-xs font-bold uppercase tracking-widest text-indigo font-heading">
             Feature Architecture
           </span>
-          <h2 className="text-3xl sm:text-5xl font-heading font-extrabold text-slate-900 mt-3 animate-float">
+          <h2 className="text-3xl sm:text-5xl font-heading font-extrabold text-slate-900 mt-3">
             Every HR tool you need, <br />
             unified in one single box.
           </h2>
@@ -64,18 +89,58 @@ export default function Features() {
               </span>
               <h3 className="text-xl font-heading font-extrabold text-slate-900">AI Candidate Screening</h3>
               <p className="text-xs text-slate-500 leading-relaxed">
-                Scan incoming resumes instantly, map skills alignment, and rank match scores using localized filters.
+                Scan incoming resumes instantly, map skills alignment, and rank match scores using localized filters. Hover/click cards to simulate screening.
               </p>
             </div>
             
-            {/* Visual illustration slot */}
-            <div className="relative w-full h-[180px] mt-6 rounded-xl overflow-hidden border border-slate-100 bg-slate-50">
-              <Image 
-                src="/ai_resume_screening_mockup.jpg"
-                alt="AI Resume Screening Screen Card"
-                fill
-                className="object-cover"
-              />
+            {/* Interactive Candidate Screener Widget */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
+              {candidates.map((cand, idx) => (
+                <div
+                  key={idx}
+                  onMouseEnter={() => setActiveCandidate(idx)}
+                  className={`p-4 rounded-2xl border transition-all duration-300 cursor-pointer ${
+                    activeCandidate === idx
+                      ? "bg-indigo-50/50 border-indigo shadow-sm"
+                      : "bg-slate-50 border-slate-100"
+                  }`}
+                >
+                  <div className="flex justify-between items-center mb-3">
+                    <div>
+                      <h4 className="text-xs font-bold text-slate-800">{cand.name}</h4>
+                      <p className="text-[9px] text-slate-400 font-medium">{cand.role}</p>
+                    </div>
+                    
+                    {/* Dynamic Loader / Match Badge */}
+                    <AnimatePresence mode="wait">
+                      {activeCandidate === idx ? (
+                        <motion.span
+                          key="match"
+                          initial={{ opacity: 0, scale: 0.8 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          className="px-2 py-0.5 rounded bg-emerald-50 border border-emerald-200 text-[10px] font-bold text-emerald-600 font-mono"
+                        >
+                          {cand.match}% Match
+                        </motion.span>
+                      ) : (
+                        <motion.span
+                          key="loading"
+                          className="w-3.5 h-3.5 border border-indigo border-t-transparent rounded-full animate-spin"
+                        />
+                      )}
+                    </AnimatePresence>
+                  </div>
+                  
+                  {/* Skills tags */}
+                  <div className="flex flex-wrap gap-1.5">
+                    {cand.skills.map((sk) => (
+                      <span key={sk} className="text-[8px] font-bold text-slate-500 bg-white border border-slate-200/60 px-1.5 py-0.5 rounded">
+                        {sk}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
 
@@ -87,19 +152,36 @@ export default function Features() {
               </span>
               <h3 className="text-xl font-heading font-extrabold text-slate-900">Real-time Punch-In</h3>
               <p className="text-xs text-slate-500 leading-relaxed">
-                Seamless geofenced check-ins via employee portal. Limits clock-ins to target work hubs automatically.
+                Seamless geofenced check-ins via employee portal. Click the trigger button below to try check-in.
               </p>
             </div>
             
-            {/* Interactive checkin bubble mockup */}
-            <div className="relative h-[160px] flex items-center justify-center bg-slate-50 border border-slate-100 rounded-xl mt-6 p-4">
-              <div className="relative flex flex-col items-center">
-                <div className="w-12 h-12 rounded-full bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-600 animate-pulse">
-                  <UserCheck className="w-6 h-6" />
-                </div>
-                <span className="text-[10px] font-bold text-slate-800 mt-2">Active Geofence verified</span>
-                <span className="text-[9px] text-slate-400 mt-1 uppercase font-mono">lat: 19.0760, long: 72.8777</span>
-              </div>
+            {/* Interactive checkin button playground */}
+            <div className="relative h-[160px] flex flex-col items-center justify-center bg-slate-50 border border-slate-100 rounded-2xl mt-6 p-4 space-y-3">
+              <AnimatePresence mode="wait">
+                {!isCheckedIn ? (
+                  <motion.button
+                    key="punch"
+                    onClick={() => setIsCheckedIn(true)}
+                    className="px-4 py-2 bg-indigo text-white text-[10px] font-bold rounded-full cursor-pointer shadow hover:bg-indigo-600 transition-colors"
+                  >
+                    Simulate Punch-In
+                  </motion.button>
+                ) : (
+                  <motion.div
+                    key="success"
+                    initial={{ scale: 0.9, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    className="flex flex-col items-center text-center space-y-1"
+                  >
+                    <div className="w-10 h-10 rounded-full bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-600">
+                      <UserCheck className="w-5 h-5 animate-pulse" />
+                    </div>
+                    <span className="text-[10px] font-bold text-slate-800">Checked In Successfully</span>
+                    <span className="text-[8px] text-slate-400 font-mono">Mumbai Hub — 9:00 AM</span>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
           </div>
 
@@ -111,20 +193,29 @@ export default function Features() {
               </span>
               <h3 className="text-xl font-heading font-extrabold text-slate-900">Aadhaar & PAN Storage</h3>
               <p className="text-xs text-slate-500 leading-relaxed">
-                Encrypted storage for employee tax documents. Ensures DPDP Act compliance with automatic data export filters.
+                Encrypted storage for employee tax documents. Hover cards to perform digital signing check.
               </p>
             </div>
             
             {/* File cards mockup */}
             <div className="space-y-2 mt-6">
-              <div className="p-2.5 rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-between text-xs text-slate-700">
-                <span className="font-mono">pan_card_verification.pdf</span>
-                <span className="text-[9px] text-emerald-600 font-bold bg-emerald-50 px-1.5 py-0.5 rounded">VERIFIED</span>
-              </div>
-              <div className="p-2.5 rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-between text-xs text-slate-700">
-                <span className="font-mono">aadhaar_front.jpg</span>
-                <span className="text-[9px] text-emerald-600 font-bold bg-emerald-50 px-1.5 py-0.5 rounded">VERIFIED</span>
-              </div>
+              {["PAN Card", "Aadhaar Card"].map((doc) => (
+                <div
+                  key={doc}
+                  onMouseEnter={() => setHoveredDoc(doc)}
+                  onMouseLeave={() => setHoveredDoc(null)}
+                  className={`p-3 rounded-xl border flex items-center justify-between text-xs font-semibold transition-all duration-300 ${
+                    hoveredDoc === doc
+                      ? "bg-emerald-50 border-emerald-200 text-emerald-700"
+                      : "bg-slate-50 border-slate-100 text-slate-700"
+                  }`}
+                >
+                  <span className="font-mono">{doc.toLowerCase().replace(" ", "_")}.pdf</span>
+                  <span className="text-[8px] font-bold uppercase">
+                    {hoveredDoc === doc ? "Verified ✅" : "Click to view"}
+                  </span>
+                </div>
+              ))}
             </div>
           </div>
 
@@ -134,22 +225,47 @@ export default function Features() {
               <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-rose-50 text-rose-500 text-[10px] font-bold uppercase tracking-wider">
                 <ShieldCheck className="w-3.5 h-3.5" /> Statutory Slabs
               </span>
-              <h3 className="text-xl font-heading font-extrabold text-slate-900">Automated Indian Compliance</h3>
+              <h3 className="text-xl font-heading font-extrabold text-slate-900">State Professional Tax Matrix</h3>
               <p className="text-xs text-slate-500 leading-relaxed">
-                Process monthly payroll runs with auto deductions calculated for EPF (12%), ESIC, Professional Tax, and TDS brackets.
+                Click states below to dynamically visualize professional tax (PT) brackets configured across different hubs.
               </p>
             </div>
             
-            {/* Visual illustration slot */}
-            <div className="relative w-full h-[180px] mt-6 rounded-xl overflow-hidden border border-slate-100 bg-slate-50">
-              <Image 
-                src="/compliance_payroll_mockup.jpg"
-                alt="Payroll Deductions Sheet Card"
-                fill
-                className="object-cover"
-              />
+            {/* Interactive PT Slab Viewer */}
+            <div className="space-y-3 mt-6">
+              <div className="flex gap-2 border-b border-slate-100 pb-2">
+                {(["MH", "KA", "TN"] as const).map((st) => (
+                  <button
+                    key={st}
+                    onClick={() => setSelectedState(st)}
+                    className={`px-3 py-1 rounded text-[10px] font-bold transition-all cursor-pointer ${
+                      selectedState === st
+                        ? "bg-indigo text-white shadow-sm"
+                        : "bg-slate-50 border border-slate-200/60 text-slate-600 hover:bg-slate-100"
+                    }`}
+                  >
+                    {st === "MH" ? "Maharashtra" : st === "KA" ? "Karnataka" : "Tamil Nadu"}
+                  </button>
+                ))}
+              </div>
+
+              <div className="space-y-1.5 bg-slate-50 p-3 rounded-xl border border-slate-100 font-mono text-[10px]">
+                <div className="grid grid-cols-3 text-slate-400 font-bold uppercase tracking-wider border-b border-slate-200/60 pb-1">
+                  <span>Basic Wage Min</span>
+                  <span>Basic Wage Max</span>
+                  <span className="text-right">Monthly PT</span>
+                </div>
+                {ptSlabs[selectedState].map((slab, idx) => (
+                  <div key={idx} className="grid grid-cols-3 text-slate-700 py-0.5">
+                    <span>₹{slab.min.toLocaleString("en-IN")}</span>
+                    <span>{typeof slab.max === "number" ? `₹${slab.max.toLocaleString("en-IN")}` : slab.max}</span>
+                    <span className="text-right text-indigo font-bold">₹{slab.pt}</span>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
+
         </div>
 
         {/* 📋 SECONDARY FEATURES COMPACT GRID */}
@@ -180,4 +296,3 @@ export default function Features() {
     </section>
   );
 }
-
