@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import GlassCard from "../ui/GlassCard";
 import SectionReveal from "../ui/SectionReveal";
 import GradientButton from "../ui/GradientButton";
-import { Check, Info } from "lucide-react";
+import { Check } from "lucide-react";
 
 export default function Pricing() {
   const [isAnnual, setIsAnnual] = useState(true);
@@ -59,18 +59,18 @@ export default function Pricing() {
   ];
 
   return (
-    <section id="pricing" className="relative py-24 border-t border-white/5 bg-bg-light/20 dark:bg-bg-dark/20 overflow-hidden">
-      <div className="absolute left-[5%] top-[20%] w-[350px] h-[350px] bg-marigold/10 rounded-full blur-[100px] -z-10" />
+    <section id="pricing" className="relative py-28 border-t border-white/5 bg-[#070412] overflow-hidden">
+      <div className="absolute right-[10%] top-[20%] w-[400px] h-[400px] bg-rose-500/5 rounded-full blur-[120px] -z-10" />
 
-      <div className="max-w-7xl mx-auto px-6">
-        <SectionReveal direction="up" className="text-center max-w-2xl mx-auto mb-8">
-          <span className="text-xs font-bold uppercase tracking-widest text-indigo dark:text-marigold font-heading">
+      <div className="max-w-6xl mx-auto px-6">
+        <SectionReveal direction="up" className="text-center max-w-2xl mx-auto mb-12">
+          <span className="text-xs font-bold uppercase tracking-widest text-rose-500 font-heading">
             Pricing Plans
           </span>
-          <h2 className="text-3xl sm:text-4xl font-heading font-extrabold text-foreground dark:text-white mt-2">
+          <h2 className="text-3xl sm:text-5xl font-heading font-extrabold text-white mt-3">
             Simple pricing, built to scale
           </h2>
-          <p className="text-sm text-zinc-500 dark:text-zinc-400 mt-4">
+          <p className="text-sm text-zinc-400 mt-4 leading-relaxed">
             Pay only for the active employees you manage. AI features included in every plan. No hidden setup fees.
           </p>
         </SectionReveal>
@@ -80,16 +80,16 @@ export default function Pricing() {
           <span className="text-xs font-semibold text-zinc-500">Monthly</span>
           <button
             onClick={() => setIsAnnual(!isAnnual)}
-            className="w-12 h-6 rounded-full bg-white/40 dark:bg-white/5 border border-white/60 dark:border-white/10 relative p-1 flex items-center cursor-pointer transition-all"
+            className="w-12 h-6 rounded-full bg-white/5 border border-white/10 relative p-1 flex items-center cursor-pointer transition-all"
           >
             <div
-              className={`w-4 h-4 rounded-full bg-gradient-to-r from-marigold to-gulal-rose transition-transform duration-300 ${
+              className={`w-4 h-4 rounded-full bg-gradient-to-r from-rose-500 to-marigold transition-transform duration-300 ${
                 isAnnual ? "translate-x-6" : "translate-x-0"
               }`}
             />
           </button>
-          <span className="text-xs font-semibold text-foreground flex items-center gap-1">
-            Annual Billing <span className="px-2 py-0.5 rounded-full text-[9px] font-heading font-extrabold uppercase bg-mint-teal/20 text-mint-teal">Save 20%</span>
+          <span className="text-xs font-semibold text-white flex items-center gap-1.5">
+            Annual Billing <span className="px-2 py-0.5 rounded-full text-[9px] font-heading font-extrabold uppercase bg-emerald-500/10 text-emerald-400">Save 20%</span>
           </span>
         </div>
 
@@ -105,51 +105,51 @@ export default function Pricing() {
                 className="h-full"
               >
                 <GlassCard
-                  className={`p-8 h-full flex flex-col justify-between relative border-t-4 transition-all duration-300
+                  className={`p-8 h-full flex flex-col justify-between relative border-t-4 transition-all duration-300 bg-gradient-to-b from-[#100b26]/50 to-[#070412]/50
                     ${
                       tier.popular
-                        ? "border-t-gulal-rose shadow-xl scale-102"
-                        : "border-t-white/40 dark:border-t-white/10"
+                        ? "border-t-rose-500 shadow-[0_0_40px_rgba(232,87,123,0.1)] scale-102"
+                        : "border-t-white/10"
                     }
                   `}
                   hoverShimmer
                 >
                   {tier.popular && (
-                    <span className="absolute top-4 right-6 px-3 py-1 rounded-full text-[9px] font-heading font-extrabold uppercase bg-gulal-rose/25 text-gulal-rose">
+                    <span className="absolute top-4 right-6 px-3 py-1 rounded-full text-[9px] font-heading font-extrabold uppercase bg-rose-500/10 text-rose-400">
                       Recommended
                     </span>
                   )}
 
                   <div>
-                    <h3 className="font-heading font-extrabold text-xl text-foreground dark:text-white">
+                    <h3 className="font-heading font-extrabold text-xl text-white">
                       {tier.name}
                     </h3>
-                    <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-2 min-h-[35px] leading-relaxed">
+                    <p className="text-xs text-zinc-400 mt-2 min-h-[35px] leading-relaxed">
                       {tier.desc}
                     </p>
 
                     {/* Price details */}
                     <div className="my-6">
                       {price !== null ? (
-                        <div className="flex items-baseline">
-                          <span className="text-3xl font-extrabold font-numbers text-foreground dark:text-white">₹{price}</span>
-                          <span className="text-xs text-zinc-500 ml-1 font-medium">/ employee / month</span>
+                        <div className="flex items-baseline gap-1">
+                          <span className="text-4xl font-extrabold font-numbers text-white">₹{price}</span>
+                          <span className="text-[11px] text-zinc-500 font-medium">/ employee / month</span>
                         </div>
                       ) : (
-                        <span className="text-2xl font-extrabold text-foreground dark:text-white">Custom Pricing</span>
+                        <span className="text-2xl font-extrabold text-white">Custom Pricing</span>
                       )}
                       {price !== null && isAnnual && (
-                        <span className="text-[10px] text-zinc-400 font-bold block mt-1 uppercase">Billed annually</span>
+                        <span className="text-[9px] text-zinc-400 font-bold block mt-1 uppercase tracking-wider">Billed annually</span>
                       )}
                     </div>
 
-                    <hr className="border-zinc-200 dark:border-zinc-800/80 my-4" />
+                    <hr className="border-white/5 my-4" />
 
                     {/* Features checklist */}
                     <ul className="space-y-3">
                       {tier.features.map((feat) => (
-                        <li key={feat} className="flex gap-2.5 text-xs text-zinc-600 dark:text-zinc-300 font-medium">
-                          <Check className="w-4 h-4 text-mint-teal shrink-0" />
+                        <li key={feat} className="flex gap-2.5 text-xs text-zinc-300 font-medium">
+                          <Check className="w-4 h-4 text-emerald-400 shrink-0" />
                           <span>{feat}</span>
                         </li>
                       ))}
@@ -160,7 +160,7 @@ export default function Pricing() {
                     {tier.name === "Enterprise" ? (
                       <GradientButton 
                         variant="secondary" 
-                        className="w-full justify-center"
+                        className="w-full justify-center py-2.5 bg-white/5 border border-white/10 text-white"
                         onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
                       >
                         Contact Sales
@@ -168,7 +168,9 @@ export default function Pricing() {
                     ) : (
                       <GradientButton 
                         variant={tier.popular ? "primary" : "secondary"} 
-                        className="w-full justify-center"
+                        className={`w-full justify-center py-2.5 ${
+                          tier.popular ? "shadow-lg shadow-rose-500/20" : "bg-white/5 border border-white/10 text-white"
+                        }`}
                         onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
                       >
                         Start Free Trial
