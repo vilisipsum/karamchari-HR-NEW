@@ -11,15 +11,22 @@ interface FooterProps {
 
 export default function Footer({ onOpenDrawer }: FooterProps) {
   return (
-    <footer className="relative mt-24 border-t border-white/10 bg-bg-light/40 dark:bg-bg-dark/40 backdrop-blur-md pt-16 pb-8">
+    <footer className="relative mt-24 border-t border-white/10 bg-[#050505]/40 backdrop-blur-md pt-16 pb-8 z-10">
       {/* Decorative Gradient Background behind footer */}
-      <div className="absolute bottom-0 right-0 w-[300px] h-[300px] rounded-full bg-indigo/10 blur-[100px] -z-10" />
+      <div className="absolute bottom-0 right-0 w-[300px] h-[300px] rounded-full bg-[#00C6FF]/10 blur-[100px] -z-10" />
 
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-6 gap-10">
         {/* Brand Column */}
         <div className="md:col-span-2 flex flex-col gap-4">
-          <InteractiveLogo />
-          <p className="text-sm text-zinc-600 dark:text-zinc-400 mt-2 max-w-sm">
+          <div className="flex items-center gap-2 group cursor-pointer w-fit">
+            <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-[#00C6FF] to-[#0072FF] flex items-center justify-center">
+              <div className="w-3 h-3 bg-white rounded-full" />
+            </div>
+            <span className="font-display font-bold text-xl tracking-tight text-white group-hover:text-white/80 transition-colors">
+              KaramcharHR
+            </span>
+          </div>
+          <p className="text-sm text-white/50 mt-2 max-w-sm font-light">
             India's AI-Powered HRMS Platform. Manage Payroll, Attendance, Recruitment, Leave, and Employee Experience on one intelligent cloud.
           </p>
           <div className="flex gap-4 items-center mt-4">
@@ -46,73 +53,73 @@ export default function Footer({ onOpenDrawer }: FooterProps) {
 
         {/* Modules Column */}
         <div className="flex flex-col gap-3">
-          <h4 className="font-heading font-bold text-xs uppercase tracking-widest text-zinc-400 dark:text-zinc-500">Modules</h4>
-          <ul className="flex flex-col gap-2.5 text-sm text-zinc-600 dark:text-zinc-400 font-medium">
-            <li><a href="#features" className="hover:text-gulal-rose transition-colors">Core HR & Directory</a></li>
-            <li><a href="#showcase" className="hover:text-gulal-rose transition-colors">Indian Payroll (₹)</a></li>
-            <li><a href="#showcase" className="hover:text-gulal-rose transition-colors">Smart Attendance</a></li>
-            <li><a href="#ai-hr" className="hover:text-gulal-rose transition-colors">AI Recruitment</a></li>
-            <li><a href="#features" className="hover:text-gulal-rose transition-colors">Performance & OKRs</a></li>
+          <h4 className="font-heading font-bold text-xs uppercase tracking-widest text-white/40">Modules</h4>
+          <ul className="flex flex-col gap-2.5 text-sm text-white/60 font-medium">
+            <li><a href="#features" className="hover:text-white transition-colors">Core HR & Directory</a></li>
+            <li><a href="#showcase" className="hover:text-white transition-colors">Indian Payroll (₹)</a></li>
+            <li><a href="#showcase" className="hover:text-white transition-colors">Smart Attendance</a></li>
+            <li><a href="#ai-hr" className="hover:text-white transition-colors">AI Recruitment</a></li>
+            <li><a href="#features" className="hover:text-white transition-colors">Performance & OKRs</a></li>
           </ul>
         </div>
 
         {/* Company Column */}
         <div className="flex flex-col gap-3">
-          <h4 className="font-heading font-bold text-xs uppercase tracking-widest text-zinc-400 dark:text-zinc-500">Company</h4>
-          <div className="flex flex-col gap-2.5 text-sm text-zinc-600 dark:text-zinc-400 font-medium items-start">
-            <button onClick={() => onOpenDrawer("about-us")} className="hover:text-gulal-rose transition-colors cursor-pointer text-left">About Us</button>
-            <button onClick={() => onOpenDrawer("careers")} className="hover:text-gulal-rose transition-colors cursor-pointer text-left">Careers</button>
-            <button onClick={() => onOpenDrawer("press-kit")} className="hover:text-gulal-rose transition-colors cursor-pointer text-left">Press Kit</button>
-            <button onClick={() => onOpenDrawer("support")} className="hover:text-gulal-rose transition-colors cursor-pointer text-left">Contact Support</button>
-            <button onClick={() => onOpenDrawer("trust")} className="hover:text-gulal-rose transition-colors cursor-pointer text-left">Trust Center</button>
+          <h4 className="font-heading font-bold text-xs uppercase tracking-widest text-white/40">Company</h4>
+          <div className="flex flex-col gap-2.5 text-sm text-white/60 font-medium items-start">
+            <button onClick={() => onOpenDrawer("about-us")} className="hover:text-white transition-colors cursor-pointer text-left">About Us</button>
+            <button onClick={() => onOpenDrawer("careers")} className="hover:text-white transition-colors cursor-pointer text-left">Careers</button>
+            <button onClick={() => onOpenDrawer("press-kit")} className="hover:text-white transition-colors cursor-pointer text-left">Press Kit</button>
+            <button onClick={() => onOpenDrawer("support")} className="hover:text-white transition-colors cursor-pointer text-left">Contact Support</button>
+            <button onClick={() => onOpenDrawer("trust")} className="hover:text-white transition-colors cursor-pointer text-left">Trust Center</button>
           </div>
         </div>
 
         {/* Resources Column */}
         <div className="flex flex-col gap-3">
-          <h4 className="font-heading font-bold text-xs uppercase tracking-widest text-zinc-400 dark:text-zinc-500">Resources</h4>
-          <div className="flex flex-col gap-2.5 text-sm text-zinc-600 dark:text-zinc-400 font-medium items-start">
-            <button onClick={() => onOpenDrawer("hr-glossary")} className="hover:text-gulal-rose transition-colors cursor-pointer text-left">HR Glossary (India)</button>
-            <button onClick={() => onOpenDrawer("epf-esi-calc")} className="hover:text-gulal-rose transition-colors cursor-pointer text-left">EPF & ESI Calculator</button>
-            <button onClick={() => onOpenDrawer("slab-tax-calc")} className="hover:text-gulal-rose transition-colors cursor-pointer text-left">Slab Tax Calculator</button>
-            <button onClick={() => onOpenDrawer("developer-api")} className="hover:text-gulal-rose transition-colors cursor-pointer text-left">Developer API</button>
-            <button onClick={() => onOpenDrawer("system-status")} className="hover:text-gulal-rose transition-colors cursor-pointer text-left">System Status</button>
+          <h4 className="font-heading font-bold text-xs uppercase tracking-widest text-white/40">Resources</h4>
+          <div className="flex flex-col gap-2.5 text-sm text-white/60 font-medium items-start">
+            <button onClick={() => onOpenDrawer("hr-glossary")} className="hover:text-white transition-colors cursor-pointer text-left">HR Glossary (India)</button>
+            <button onClick={() => onOpenDrawer("epf-esi-calc")} className="hover:text-white transition-colors cursor-pointer text-left">EPF & ESI Calculator</button>
+            <button onClick={() => onOpenDrawer("slab-tax-calc")} className="hover:text-white transition-colors cursor-pointer text-left">Slab Tax Calculator</button>
+            <button onClick={() => onOpenDrawer("developer-api")} className="hover:text-white transition-colors cursor-pointer text-left">Developer API</button>
+            <button onClick={() => onOpenDrawer("system-status")} className="hover:text-white transition-colors cursor-pointer text-left">System Status</button>
           </div>
         </div>
 
         {/* Newsletter Column */}
         <div className="flex flex-col gap-4">
-          <h4 className="font-heading font-bold text-xs uppercase tracking-widest text-zinc-400 dark:text-zinc-500">Stay Updated</h4>
-          <p className="text-xs text-zinc-600 dark:text-zinc-400">
+          <h4 className="font-heading font-bold text-xs uppercase tracking-widest text-white/40">Stay Updated</h4>
+          <p className="text-xs text-white/60">
             Subscribe to our weekly newsletter for compliance alerts and HR guides.
           </p>
           <div className="flex gap-2">
             <input
               type="email"
               placeholder="hr@company.in"
-              className="px-3.5 py-2.5 w-full rounded-xl bg-white dark:bg-white/5 border border-indigo/[0.12] dark:border-white/10 text-xs text-foreground focus:outline-none focus:border-gulal-rose"
+              className="px-3.5 py-2.5 w-full rounded-xl bg-white/5 border border-white/10 text-xs text-white focus:outline-none focus:border-[#00C6FF]"
             />
-            <button className="p-2.5 rounded-xl bg-gradient-to-r from-marigold to-gulal-rose hover:scale-105 active:scale-95 transition-transform duration-200 text-white cursor-pointer">
+            <button className="p-2.5 rounded-xl bg-gradient-to-r from-[#00C6FF] to-[#0072FF] hover:scale-105 active:scale-95 transition-transform duration-200 text-white cursor-pointer">
               <ArrowRight className="w-4 h-4" />
             </button>
           </div>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 mt-16 pt-8 border-t border-zinc-200 dark:border-zinc-800 flex flex-col md:flex-row items-center justify-between gap-6">
+      <div className="max-w-7xl mx-auto px-6 mt-16 pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-6 relative z-10">
         <div className="flex flex-col md:flex-row items-center gap-2 md:gap-6">
-          <p className="text-xs text-zinc-500 font-medium">
+          <p className="text-xs text-white/40 font-medium">
             © {new Date().getFullYear()} KaramcharHR (karamcharhr.online). All rights reserved.
           </p>
-          <div className="flex gap-3 text-xs text-zinc-500 font-medium">
-            <button onClick={() => onOpenDrawer("terms")} className="hover:text-gulal-rose cursor-pointer transition-colors">Terms & Conditions</button>
+          <div className="flex gap-3 text-xs text-white/40 font-medium">
+            <button onClick={() => onOpenDrawer("terms")} className="hover:text-white cursor-pointer transition-colors">Terms & Conditions</button>
             <span>•</span>
-            <button onClick={() => onOpenDrawer("privacy")} className="hover:text-gulal-rose cursor-pointer transition-colors">Privacy Policy</button>
+            <button onClick={() => onOpenDrawer("privacy")} className="hover:text-white cursor-pointer transition-colors">Privacy Policy</button>
             <span>•</span>
-            <button onClick={() => onOpenDrawer("cookies")} className="hover:text-gulal-rose cursor-pointer transition-colors">Cookie Policy</button>
+            <button onClick={() => onOpenDrawer("cookies")} className="hover:text-white cursor-pointer transition-colors">Cookie Policy</button>
           </div>
         </div>
-        <p className="text-xs text-zinc-500 flex items-center gap-1 font-medium">
+        <p className="text-xs text-white/40 flex items-center gap-1 font-medium">
           Made with ❤️ in India for the global workforce.
         </p>
       </div>

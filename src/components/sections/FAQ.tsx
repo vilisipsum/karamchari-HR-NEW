@@ -1,97 +1,86 @@
-"use client";
+'use client'
 
-import React, { useState } from "react";
-import GlassCard from "../ui/GlassCard";
-import SectionReveal from "../ui/SectionReveal";
-import { Plus, Minus } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { Plus, Minus } from 'lucide-react'
+
+const faqs = [
+  {
+    question: "Is KaramcharHR compliant with Indian labor laws?",
+    answer: "Yes, completely. Our platform automatically handles Professional Tax (across all states), TDS, EPF, and ESIC calculations according to the latest Indian regulatory frameworks."
+  },
+  {
+    question: "Can we integrate our existing biometric attendance machines?",
+    answer: "Absolutely. KaramcharHR provides secure API bridges to sync attendance data from ZKTeco, eSSL, and other major biometric hardware providers in real-time."
+  },
+  {
+    question: "How does the AI Resume Screening work?",
+    answer: "Our proprietary neural engine analyzes candidate resumes against job descriptions, extracting relevant skills, experience, and educational background to rank applicants objectively, removing human bias from the initial screening process."
+  },
+  {
+    question: "What happens to our data security?",
+    answer: "We employ enterprise-grade security. All data is encrypted at rest and in transit using AES-256. Our infrastructure is hosted on secure AWS servers located physically in Mumbai, ensuring compliance with data localization requirements."
+  },
+  {
+    question: "Can employees access the portal on their phones?",
+    answer: "Yes, the KaramcharHR portal is fully responsive and behaves like a native app on mobile browsers, allowing employees to clock in, apply for leave, and view payslips on the go."
+  }
+]
 
 export default function FAQ() {
-  const [openIdx, setOpenIdx] = useState<number | null>(0);
-
-  const faqItems = [
-    {
-      q: "Is KaramcharHR compliant with Indian labor laws?",
-      a: "Yes. KaramcharHR is built for Indian compliance. We automate deductions for Employee Provident Fund (EPF), ESIC, Professional Tax (PT), and calculate TDS deductions. We also support Form 16 and Form 24Q preparation.",
-    },
-    {
-      q: "Can we sync our existing biometric attendance hardware?",
-      a: "Absolutely. We provide Cloud Webhooks and API bindings for major biometric scanners including eSSL, ZKTeco, Matrix, and Suprema. Logs are synced to the attendance sheet in real time.",
-    },
-    {
-      q: "How does the AI Resume Screening system work?",
-      a: "Simply upload a batch of resumes (PDF/DOCX) into the recruitment module. Our parser analyzes skills, CTC records, and job history, assigning an alignment match score against your Job Description.",
-    },
-    {
-      q: "Do you support regional holiday calendars in India?",
-      a: "Yes. You can create multiple holiday lists (e.g. Maha Shivratri, Ganesh Chaturthi, Chhath Puja, Pongal) and assign them to specific hubs or Noida, Bengaluru, and Mumbai offices.",
-    },
-    {
-      q: "How secure are employee documents (PAN, Aadhaar, Bank Details)?",
-      a: "All personal identity numbers and KYC documents are encrypted using AES-256 bank-grade cryptography. We strictly adhere to Indian IT Act guidelines and security protocols.",
-    },
-    {
-      q: "Can we customize leave rules (CL, SL, EL carryforwards)?",
-      a: "Yes. You can build accrual cycles (monthly, quarterly), set maximum carryforward balances, establish sandwich rules, and define approval workflows tailored to your company rules.",
-    },
-  ];
+  const [activeIndex, setActiveIndex] = useState<number | null>(null)
 
   return (
-    <section id="faq" className="relative py-24 border-t border-white/5 bg-bg-light/20 dark:bg-bg-dark/20 overflow-hidden">
-      <div className="absolute right-[5%] top-[10%] w-[350px] h-[350px] bg-indigo/5 rounded-full blur-[100px] -z-10" />
+    <section className="py-32 relative z-10">
+      <div className="container mx-auto px-6">
+        <div className="max-w-3xl mx-auto">
+          <motion.h2 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-4xl md:text-5xl font-display font-bold text-white text-center mb-16"
+          >
+            Frequently asked <span className="text-white/40">questions.</span>
+          </motion.h2>
 
-      <div className="max-w-4xl mx-auto px-6">
-        <SectionReveal direction="up" className="text-center max-w-2xl mx-auto mb-16">
-          <span className="text-xs font-bold uppercase tracking-widest text-indigo dark:text-marigold font-heading">
-            FAQ Section
-          </span>
-          <h2 className="text-3xl sm:text-4xl font-heading font-extrabold text-foreground dark:text-white mt-2">
-            Frequently Asked Questions
-          </h2>
-        </SectionReveal>
-
-        {/* Accordion List */}
-        <div className="space-y-4">
-          {faqItems.map((item, index) => {
-            const isOpen = index === openIdx;
-            return (
-              <SectionReveal
-                key={index}
-                direction="up"
-                delay={index * 0.05}
+          <div className="space-y-4">
+            {faqs.map((faq, i) => (
+              <motion.div 
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className="glass-panel rounded-2xl overflow-hidden"
               >
-                <GlassCard className="border-white/60 dark:border-white/5 overflow-hidden">
-                  <button
-                    onClick={() => setOpenIdx(isOpen ? null : index)}
-                    className="w-full text-left p-5 flex justify-between items-center text-sm font-heading font-bold text-foreground dark:text-white cursor-pointer outline-none hover:text-gulal-rose transition-colors"
-                  >
-                    <span>{item.q}</span>
-                    <span className="p-1 rounded bg-indigo/[0.03] dark:bg-white/5 border border-indigo/[0.12] dark:border-white/10 shrink-0">
-                      {isOpen ? <Minus className="w-3.5 h-3.5" /> : <Plus className="w-3.5 h-3.5" />}
-                    </span>
-                  </button>
-
-                  <AnimatePresence initial={false}>
-                    {isOpen && (
-                      <motion.div
-                        initial={{ height: 0 }}
-                        animate={{ height: "auto" }}
-                        exit={{ height: 0 }}
-                        transition={{ duration: 0.3, ease: "easeInOut" }}
-                        className="overflow-hidden"
-                      >
-                        <div className="px-5 pb-5 pt-1 text-xs text-zinc-500 dark:text-zinc-400 leading-relaxed font-medium">
-                          {item.a}
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </GlassCard>
-              </SectionReveal>
-            );
-          })}
+                <button
+                  onClick={() => setActiveIndex(activeIndex === i ? null : i)}
+                  className="w-full flex items-center justify-between p-6 text-left"
+                >
+                  <span className="text-lg font-medium text-white/90">{faq.question}</span>
+                  <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center flex-shrink-0 transition-transform duration-300">
+                    {activeIndex === i ? <Minus className="w-4 h-4 text-white" /> : <Plus className="w-4 h-4 text-white" />}
+                  </div>
+                </button>
+                <AnimatePresence>
+                  {activeIndex === i && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.3, ease: [0.04, 0.62, 0.23, 0.98] }}
+                    >
+                      <div className="px-6 pb-6 text-white/50 leading-relaxed">
+                        {faq.answer}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
-  );
+  )
 }

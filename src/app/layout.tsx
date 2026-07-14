@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import { Sora, Inter, JetBrains_Mono, Noto_Sans_Devanagari, Plus_Jakarta_Sans } from "next/font/google";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Navbar } from '@/components/layout/Navbar';
+import { Footer } from '@/components/layout/Footer';
+import { CustomCursor } from '@/components/ui/CustomCursor';
+import { CinematicBackground } from '@/components/ui/CinematicBackground';
 import "./globals.css";
 
 const sora = Sora({
@@ -148,8 +152,14 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="min-h-full flex flex-col font-body bg-[#F8FAFC] text-slate-900 selection:bg-indigo-100">
-        {children}
+      <body className="min-h-screen flex flex-col font-sans selection:bg-indigo-500/30 selection:text-white">
+        <CustomCursor />
+        <CinematicBackground />
+        <Navbar />
+        <main className="flex-grow flex flex-col relative z-10">
+          {children}
+          <Footer />
+        </main>
         <SpeedInsights />
       </body>
     </html>

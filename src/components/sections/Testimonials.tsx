@@ -1,117 +1,88 @@
-"use client";
+'use client'
 
-import React, { useState } from "react";
-import GlassCard from "../ui/GlassCard";
-import SectionReveal from "../ui/SectionReveal";
-import { Star, ChevronLeft, ChevronRight, Quote } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from 'framer-motion'
+import { Quote } from 'lucide-react'
+
+const testimonials = [
+  {
+    quote: "KaramcharHR transformed how we handle payroll. What used to take our finance team three days now happens in minutes with absolute precision.",
+    author: "Rohan Sharma",
+    role: "Director of HR, TechFlow India",
+    color: "#00C6FF"
+  },
+  {
+    quote: "The AI screening feature is pure magic. We hired 40 engineers last quarter and the system correctly ranked our top hires every single time.",
+    author: "Priya Patel",
+    role: "VP Talent, Elevate SaaS",
+    color: "#10B981"
+  },
+  {
+    quote: "Compliance was our biggest headache across 5 state offices. The automated PT and ESIC calculations have saved us from countless regulatory fines.",
+    author: "Amit Desai",
+    role: "Founder, Zenith Retail",
+    color: "#F59E0B"
+  },
+  {
+    quote: "Finally, an HRMS that feels like it was designed in this decade. Our employees actually enjoy logging in to request leave and check their payslips.",
+    author: "Sneha Reddy",
+    role: "Chief People Officer, Nexus",
+    color: "#EC4899"
+  }
+]
 
 export default function Testimonials() {
-  const [activeIdx, setActiveIdx] = useState(0);
-
-  const testimonials = [
-    {
-      quote: "KaramcharHR cut our monthly payroll processing time from 4 days to 20 minutes. Our employees love getting their payslips automatically delivered to WhatsApp. Absolute game changer.",
-      name: "Vikram Aditya",
-      role: "VP People // BharatTech",
-      location: "Noida Hub",
-      rating: 5,
-    },
-    {
-      quote: "The AI resume screening is incredible. We parsed over 500 candidate profiles in a single afternoon and hired our lead designer. Statutory compliance (ESI/EPF) is 100% automated.",
-      name: "Nisha Kamat",
-      role: "HR Director // Mumbai FinTech Ltd",
-      location: "Mumbai Hub",
-      rating: 5,
-    },
-    {
-      quote: "Managing rotational rosters and overtime metrics for 350+ factory workers was a mess. KaramcharHR biometric sync and shift calendars resolved all tracking errors on day one.",
-      name: "Sanjay Rao",
-      role: "COO // Hind Heavy Industries",
-      location: "Pune Plant",
-      rating: 5,
-    },
-  ];
-
-  const handlePrev = () => {
-    setActiveIdx((prev) => (prev === 0 ? testimonials.length - 1 : prev - 1));
-  };
-
-  const handleNext = () => {
-    setActiveIdx((prev) => (prev === testimonials.length - 1 ? 0 : prev + 1));
-  };
-
   return (
-    <section className="relative py-24 border-t border-white/5 bg-bg-light/20 dark:bg-bg-dark/20 overflow-hidden">
-      <div className="absolute right-[10%] top-[20%] w-[300px] h-[300px] bg-marigold/5 rounded-full blur-[100px] -z-10" />
+    <section id="customers" className="py-32 relative z-10 overflow-hidden">
+      <div className="container mx-auto px-6 mb-20">
+        <div className="max-w-2xl">
+          <motion.h2 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-4xl md:text-5xl font-display font-bold text-white mb-6"
+          >
+            Trusted by teams <br />
+            <span className="text-white/40">building the future.</span>
+          </motion.h2>
+        </div>
+      </div>
 
-      <div className="max-w-4xl mx-auto px-6 text-center">
-        <SectionReveal direction="up" className="mb-12">
-          <span className="text-xs font-bold uppercase tracking-widest text-gulal-rose font-heading">
-            Testimonials
-          </span>
-          <h2 className="text-3xl sm:text-4xl font-heading font-extrabold text-foreground dark:text-white mt-2">
-            Loved by leading HR teams
-          </h2>
-        </SectionReveal>
+      <div className="relative flex overflow-hidden">
+        {/* Fade Edges */}
+        <div className="absolute top-0 left-0 bottom-0 w-32 bg-gradient-to-r from-[#050505] to-transparent z-10" />
+        <div className="absolute top-0 right-0 bottom-0 w-32 bg-gradient-to-l from-[#050505] to-transparent z-10" />
 
-        {/* Testimonial slider card */}
-        <SectionReveal direction="none" delay={0.1} className="relative min-h-[250px] flex items-center justify-center">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={activeIdx}
-              initial={{ opacity: 0, x: 30 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -30 }}
-              transition={{ duration: 0.4 }}
-              className="w-full"
+        <motion.div 
+          animate={{ x: ["0%", "-50%"] }}
+          transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
+          className="flex gap-6 px-6 whitespace-nowrap min-w-max"
+        >
+          {[...testimonials, ...testimonials].map((testimonial, i) => (
+            <div 
+              key={i} 
+              className="glass-panel p-8 rounded-3xl w-[400px] md:w-[500px] flex-shrink-0 whitespace-normal relative group"
             >
-              <GlassCard className="p-8 md:p-12 relative flex flex-col justify-between items-center gap-6 border-white/60 dark:border-white/5 shadow-2xl" hoverShimmer>
-                {/* Quote Icon */}
-                <Quote className="w-10 h-10 text-gulal-rose/20 absolute top-4 left-6" />
-
-                {/* Rating */}
-                <div className="flex gap-1">
-                  {Array.from({ length: testimonials[activeIdx].rating }).map((_, i) => (
-                    <Star key={i} className="w-4 h-4 fill-marigold text-marigold" />
-                  ))}
+              <div 
+                className="absolute -top-4 -right-4 w-24 h-24 rounded-full blur-[40px] opacity-0 group-hover:opacity-20 transition-opacity duration-500 pointer-events-none"
+                style={{ backgroundColor: testimonial.color }}
+              />
+              <Quote className="w-8 h-8 text-white/20 mb-6" />
+              <p className="text-lg md:text-xl text-white/80 font-light leading-relaxed mb-8">
+                "{testimonial.quote}"
+              </p>
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center font-bold text-white">
+                  {testimonial.author.charAt(0)}
                 </div>
-
-                {/* Quote */}
-                <p className="text-base sm:text-lg font-medium text-foreground dark:text-zinc-200 leading-relaxed italic max-w-2xl">
-                  "{testimonials[activeIdx].quote}"
-                </p>
-
-                {/* Author Info */}
                 <div>
-                  <h4 className="font-heading font-bold text-sm text-foreground dark:text-white">
-                    {testimonials[activeIdx].name}
-                  </h4>
-                  <span className="text-[10px] text-zinc-400 font-bold uppercase tracking-widest block mt-1">
-                    {testimonials[activeIdx].role} // {testimonials[activeIdx].location}
-                  </span>
+                  <div className="text-white font-medium">{testimonial.author}</div>
+                  <div className="text-sm text-white/50">{testimonial.role}</div>
                 </div>
-              </GlassCard>
-            </motion.div>
-          </AnimatePresence>
-
-          {/* Slider navigation buttons */}
-          <div className="flex justify-center gap-4 mt-8">
-            <button
-              onClick={handlePrev}
-              className="p-3 rounded-xl bg-white/40 dark:bg-white/5 border border-white/60 dark:border-white/10 text-foreground hover:bg-white/60 dark:hover:bg-white/10 transition-colors cursor-pointer"
-            >
-              <ChevronLeft className="w-4 h-4" />
-            </button>
-            <button
-              onClick={handleNext}
-              className="p-3 rounded-xl bg-white/40 dark:bg-white/5 border border-white/60 dark:border-white/10 text-foreground hover:bg-white/60 dark:hover:bg-white/10 transition-colors cursor-pointer"
-            >
-              <ChevronRight className="w-4 h-4" />
-            </button>
-          </div>
-        </SectionReveal>
+              </div>
+            </div>
+          ))}
+        </motion.div>
       </div>
     </section>
-  );
+  )
 }
