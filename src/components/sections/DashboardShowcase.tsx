@@ -64,7 +64,7 @@ export default function DashboardShowcase() {
         </div>
 
         {/* Mockup Display Box */}
-        <GlassCard className="w-full h-auto lg:aspect-[16/9] min-h-[480px] p-4 sm:p-6 flex flex-col justify-between overflow-hidden shadow-2xl relative" hoverShimmer>
+        <GlassCard className="w-full h-auto p-4 sm:p-6 flex flex-col overflow-hidden shadow-2xl relative" hoverShimmer>
           {/* Top fake bar */}
           <div className="flex items-center justify-between border-b border-zinc-200 dark:border-zinc-800/80 pb-4 mb-4">
             <div className="flex items-center gap-4">
@@ -87,8 +87,8 @@ export default function DashboardShowcase() {
             </div>
           </div>
 
-          <div className="flex-1 overflow-x-auto overflow-y-auto pr-1 no-scrollbar">
-            <div className="min-w-[780px] lg:min-w-0 h-full flex flex-col justify-between">
+          <div className="flex-1 overflow-x-auto pr-1 no-scrollbar">
+            <div className="min-w-[780px] lg:min-w-0">
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeTab}
@@ -96,11 +96,11 @@ export default function DashboardShowcase() {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.98 }}
                 transition={{ duration: 0.3 }}
-                className="h-full"
+                className="h-auto"
               >
                 {/* 1. Dashboard View */}
                 {activeTab === "dashboard" && (
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4 h-full">
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div className="md:col-span-2 space-y-4">
                       {/* Stats grid */}
                       <div className="grid grid-cols-3 gap-3">
@@ -145,9 +145,9 @@ export default function DashboardShowcase() {
                     </div>
                     {/* Activity Column */}
                     <div className="space-y-4">
-                      <div className="p-4 bg-indigo/[0.03] dark:bg-white/5 border border-indigo/[0.06] dark:border-white/10 rounded-xl h-full flex flex-col justify-between">
+                      <div className="p-4 bg-indigo/[0.03] dark:bg-white/5 border border-indigo/[0.06] dark:border-white/10 rounded-xl space-y-4">
                         <span className="text-[10px] font-bold uppercase text-zinc-500 dark:text-zinc-400">Critical HR Actions</span>
-                        <div className="space-y-3 mt-4 flex-1">
+                        <div className="space-y-3 mt-4">
                           {[
                             { text: "Confirm June TDS file submission", alert: true },
                             { text: "Review 3 sick leave approvals", alert: false },
@@ -252,7 +252,7 @@ export default function DashboardShowcase() {
                       </div>
                     </div>
                     <div className="md:col-span-4 space-y-4">
-                      <div className="p-4 bg-indigo/[0.03] dark:bg-white/5 border border-indigo/[0.06] dark:border-white/10 rounded-xl h-full flex flex-col justify-between">
+                      <div className="p-4 bg-indigo/[0.03] dark:bg-white/5 border border-indigo/[0.06] dark:border-white/10 rounded-xl space-y-4">
                         <span className="text-[10px] font-bold uppercase text-zinc-500 dark:text-zinc-400">Statutory Compliance Status</span>
                         <div className="space-y-3.5 mt-4">
                           {[
@@ -303,7 +303,7 @@ export default function DashboardShowcase() {
 
                 {/* 5. Recruitment Kanban */}
                 {activeTab === "kanban" && (
-                  <div className="grid grid-cols-4 gap-3 h-full">
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                     {[
                       { title: "Sourced (4)", list: ["Vikram - SDE-2", "Pooja - Designer"] },
                       { title: "Screened (2)", list: ["Rohan - HR Manager"] },
@@ -400,7 +400,7 @@ export default function DashboardShowcase() {
                     </div>
                     {/* Right column with Progress Ring */}
                     <div className="md:col-span-4 flex items-center justify-center">
-                      <div className="p-4 bg-indigo/[0.03] dark:bg-white/5 border border-indigo/[0.06] dark:border-white/10 rounded-xl h-full w-full flex flex-col items-center justify-center gap-3">
+                      <div className="p-4 bg-indigo/[0.03] dark:bg-white/5 border border-indigo/[0.06] dark:border-white/10 rounded-xl w-full flex flex-col items-center justify-center gap-3 py-6">
                         <span className="text-[10px] font-bold text-zinc-500 dark:text-zinc-400 uppercase">Overall Team Health</span>
                         <GradientProgressRing progress={88} label="88%" sublabel="Healthy" size={100} />
                       </div>
