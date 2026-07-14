@@ -95,7 +95,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${sora.variable} ${inter.variable} ${jetbrainsMono.variable} ${devanagari.variable} h-full antialiased`}
+      className={`${sora.variable} ${inter.variable} ${jetbrainsMono.variable} ${devanagari.variable} h-full antialiased dark`}
     >
       <head>
         <script
