@@ -50,7 +50,16 @@ export const metadata: Metadata = {
     "how to process payroll with TDS deduction India",
     "employer guide to EPF and ESIC registration",
     "latest professional tax rates in India by state",
-    "simplifying payroll compliance for Indian startups"
+    "simplifying payroll compliance for Indian startups",
+    "startups ke liye best HRMS software",
+    "sasta payroll software India",
+    "employee attendance track karne wala app",
+    "company payroll calculation kaise kare",
+    "PF ESIC compliance online calculation",
+    "कर्मचारी सैलरी सॉफ्टवेयर",
+    "अटेंडेंस ट्रैकिंग सिस्टम",
+    "भारत का सबसे अच्छा HRMS",
+    "स्टार्टअप्स के लिए पेरोल ऐप"
   ],
   authors: [{ name: "KaramcharHR Team", url: "https://karamcharhr.online" }],
   creator: "KaramcharHR",
