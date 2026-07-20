@@ -1,10 +1,10 @@
 'use client'
 
 import { useRef, useState } from 'react'
-import { motion } from 'framer-motion'
+import { motion, HTMLMotionProps } from 'framer-motion'
 import { cn } from '@/lib/utils'
 
-interface MagneticButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface MagneticButtonProps extends HTMLMotionProps<'button'> {
   children: React.ReactNode
   className?: string
   variant?: 'primary' | 'secondary' | 'glass'
@@ -16,7 +16,8 @@ export function MagneticButton({ children, className, variant = 'primary', ...pr
 
   const handleMouse = (e: React.MouseEvent<HTMLButtonElement>) => {
     const { clientX, clientY } = e
-    const { height, width, left, top } = buttonRef.current!.getBoundingClientRect()
+    if (!buttonRef.current) return
+    const { height, width, left, top } = buttonRef.current.getBoundingClientRect()
     const middleX = clientX - (left + width / 2)
     const middleY = clientY - (top + height / 2)
     setPosition({ x: middleX * 0.1, y: middleY * 0.1 })

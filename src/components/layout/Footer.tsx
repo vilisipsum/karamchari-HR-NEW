@@ -6,10 +6,10 @@ import { ArrowRight } from "lucide-react";
 import GradientButton from "../ui/GradientButton";
 
 interface FooterProps {
-  onOpenDrawer: (id: string) => void;
+  onOpenDrawer?: (id: string) => void;
 }
 
-export default function Footer({ onOpenDrawer }: FooterProps) {
+export default function Footer({ onOpenDrawer = () => {} }: FooterProps) {
   return (
     <footer className="relative mt-24 border-t border-white/10 bg-[#050505]/40 backdrop-blur-md pt-16 pb-8 z-10">
       {/* Decorative Gradient Background behind footer */}

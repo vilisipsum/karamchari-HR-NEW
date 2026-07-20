@@ -313,7 +313,7 @@ export async function getOrgChart(orgId: string) {
         ...e,
         role: e.designations?.[0] ?? null,
         department: e.departments?.[0] ?? null,
-        initials: (e.profiles?.full_name ? e.profiles.full_name.substring(0, 2) : `${e.first_name?.[0] || 'E'}${e.last_name?.[0] || 'M'}`).toUpperCase(),
+        initials: ((Array.isArray(e.profiles) ? e.profiles[0]?.full_name : (e.profiles as any)?.full_name) ? (Array.isArray(e.profiles) ? e.profiles[0]?.full_name : (e.profiles as any)?.full_name).substring(0, 2) : `${e.first_name?.[0] || 'E'}${e.last_name?.[0] || 'M'}`).toUpperCase(),
         children: buildTree(e.id),
       }))
     }

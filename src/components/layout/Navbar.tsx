@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import { motion, useScroll, useMotionValueEvent } from 'framer-motion'
 import Link from 'next/link'
-import { MagneticButton } from './MagneticButton'
+import { MagneticButton } from '@/components/ui/MagneticButton'
 
 export function Navbar() {
   const { scrollY } = useScroll()
@@ -12,7 +12,7 @@ export function Navbar() {
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     const previous = scrollY.getPrevious()
-    if (latest > 150 && latest > previous) {
+    if (latest > 150 && latest > (previous ?? 0)) {
       setHidden(true)
     } else {
       setHidden(false)
