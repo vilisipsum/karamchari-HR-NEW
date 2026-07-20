@@ -1,5 +1,6 @@
 'use client'
 
+import { calculateIndianPayroll } from '@/utils/payroll'
 import { StatusChip } from '@/components/ui/StatusChip'
 
 interface PayrollContentProps {
@@ -43,22 +44,32 @@ interface PayrollContentProps {
 
 export function PayrollContent({ payrollRuns, employeeSalary, salaryStructures }: PayrollContentProps) {
   const structure = employeeSalary?.salary_structures
-  const basic = structure ? (structure.ctc_annual * structure.basic_percent) / 100 : 0
-  const hra = structure ? (structure.ctc_annual * structure.hra_percent) / 100 : 0
-  const special = structure ? (structure.ctc_annual * structure.special_allowance_percent) / 100 : 0
+  const basic = structure ? (structure.ctc_annual * structure.basic_percent) / 100 / 12 : 0
+  const hra = structure ? (structure.ctc_annual * structure.hra_percent) / 100 / 12 : 0
+  const special = structure ? (structure.ctc_annual * structure.special_allowance_percent) / 100 / 12 : 0
   const conveyance = structure?.conveyance_monthly ?? 0
   const medical = structure?.medical_allowance_monthly ?? 0
-  const lta = structure?.lta_monthly ?? 0
+  const lta = structure ? (structure.lta_monthly ?? 0) / 12 : 0
   const other = structure?.other_allowances_monthly ?? 0
-  const grossMonthly = basic/12 + hra/12 + special/12 + conveyance + medical + lta/12 + other
 
-  const pfEmp = structure ? (basic * structure.pf_employee_rate) / 100 / 12 : 0
-  const pfEmployer = structure ? (basic * structure.pf_employer_rate) / 100 / 12 : 0
-  const esi = structure?.esi_applicable ? grossMonthly * 0.0075 : 0
-  const pt = structure?.professional_tax_monthly ?? 0
-  const tds = 0 // placeholder
-  const totalDeductions = pfEmp + esi + pt + tds
-  const netPay = grossMonthly - totalDeductions
+  const statutory = calculateIndianPayroll({
+    basicSalary: basic,
+    hra: hra,
+    specialAllowance: special,
+    otherAllowances: conveyance + medical + lta + other,
+    isPfApplicable: true,
+    isEsiApplicable: structure?.esi_applicable ?? true,
+    customPfRate: structure?.pf_employee_rate || 12,
+  })
+
+  const grossMonthly = statutory.grossSalary
+  const pfEmp = statutory.employeePf
+  const pfEmployer = statutory.totalEmployerPf
+  const esi = statutory.employeeEsi
+  const pt = statutory.professionalTax
+  const tds = statutory.tdsEstimate
+  const totalDeductions = statutory.totalDeductions
+  const netPay = statutory.netSalary
 
   return (
     <div className="space-y-6">

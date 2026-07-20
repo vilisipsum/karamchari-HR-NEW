@@ -67,7 +67,7 @@ BEGIN
 
   IF (TG_OP = 'INSERT') THEN
     -- Alert HR/Manager
-    IF manager_email IS NOT EXISTS THEN
+    IF manager_email IS NULL THEN
       manager_email := 'hr@company.in';
     END IF;
     
@@ -120,7 +120,7 @@ BEGIN
   LIMIT 1;
 
   IF (TG_OP = 'INSERT') THEN
-    IF finance_email IS NOT EXISTS THEN
+    IF finance_email IS NULL THEN
       finance_email := 'finance@company.in';
     END IF;
     
