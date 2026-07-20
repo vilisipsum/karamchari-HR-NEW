@@ -10,9 +10,9 @@ export default async function Layout({ children }: { children: React.ReactNode }
     .from('profiles')
     .select('org_id')
     .eq('id', user.id)
-    .single()
+    .maybeSingle()
 
-  if (!profile?.org_id) redirect('/auth/login')
+  if (!profile?.org_id) redirect('/onboarding')
 
   return <>{children}</>
 }

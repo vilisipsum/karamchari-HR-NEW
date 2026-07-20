@@ -72,13 +72,43 @@ export async function setupOrganization(prevState: AuthState, formData: FormData
 
   if (orgError) return { error: orgError.message }
 
-  // Update profile
+  // Upsert profile row to ensure org_id is saved even if profile trigger didn't fire
   const { error: profileError } = await supabase
     .from('profiles')
-    .update({ org_id: org.id, role: 'org_admin' })
-    .eq('id', user.id)
+    .upsert({
+      id: user.id,
+      email: user.email!,
+      full_name: user.user_metadata?.full_name || user.email?.split('@')[0],
+      org_id: org.id,
+      role: 'org_admin'
+    }, { onConflict: 'id' })
 
   if (profileError) return { error: profileError.message }
+
+  // Ensure employee record exists for org admin
+  const { data: existingEmp } = await supabase
+    .from('employees')
+    .select('id')
+    .eq('user_id', user.id)
+    .maybeSingle()
+
+  if (!existingEmp) {
+    const code = `EMP-${Math.floor(1000 + Math.random() * 9000)}`
+    const names = (user.user_metadata?.full_name || 'Admin User').trim().split(' ')
+    const firstName = names[0] || 'Admin'
+    const lastName = names.slice(1).join(' ') || 'User'
+    
+    await supabase.from('employees').insert({
+      user_id: user.id,
+      employee_code: code,
+      first_name: firstName,
+      last_name: lastName,
+      email: user.email!,
+      status: 'active',
+      date_of_joining: new Date().toISOString().split('T')[0],
+      org_id: org.id
+    })
+  }
 
   // Seed default data for the new org (use admin client to bypass RLS)
   const admin = await createClient(true)
