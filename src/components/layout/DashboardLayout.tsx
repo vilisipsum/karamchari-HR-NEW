@@ -1,22 +1,25 @@
 'use client'
 
 import { useState } from 'react'
-import { BackgroundBlobs } from './BackgroundBlobs'
 import { Sidebar } from './Sidebar'
 import { Topbar } from './Topbar'
 import { CopilotChat } from '@/components/ai/CopilotChat'
+import { CinematicBackground } from '@/components/ui/CinematicBackground'
+import { CustomCursor } from '@/components/ui/CustomCursor'
 
 export function DashboardLayout({ children }: { children: React.ReactNode }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
 
   return (
-    <div className="relative min-h-screen">
-      <BackgroundBlobs />
-      <div className="relative z-10 flex flex-col gap-4 p-4">
+    <div className="relative min-h-screen bg-[#050505] text-white selection:bg-[#00C6FF]/30 selection:text-white overflow-x-hidden">
+      <CustomCursor />
+      <CinematicBackground />
+
+      <div className="relative z-10 flex flex-col gap-4 p-4 md:p-6 max-w-[1600px] mx-auto">
         <Topbar onMenuClick={() => setIsSidebarOpen(true)} />
-        <div className="flex gap-5 relative" style={{ minHeight: 'calc(100vh - 120px)' }}>
+        <div className="flex gap-6 relative" style={{ minHeight: 'calc(100vh - 120px)' }}>
           {/* Desktop Sidebar */}
-          <div className="hidden lg:block min-w-[200px]">
+          <div className="hidden lg:block min-w-[210px]">
             <Sidebar />
           </div>
 
@@ -25,16 +28,16 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
             <div className="fixed inset-0 z-50 flex lg:hidden">
               {/* Backdrop */}
               <div 
-                className="fixed inset-0 bg-black/60 backdrop-blur-sm transition-opacity" 
+                className="fixed inset-0 bg-black/80 backdrop-blur-md transition-opacity" 
                 onClick={() => setIsSidebarOpen(false)}
               />
               {/* Drawer Content */}
-              <div className="relative z-10 w-[240px] h-full bg-[#0F0B22] border-r border-border/30 p-4 flex flex-col shadow-2xl">
+              <div className="relative z-10 w-[260px] h-full bg-[#0A0A0B] border-r border-white/10 p-4 flex flex-col shadow-2xl">
                 <div className="flex justify-between items-center mb-6">
                   <span className="font-display font-semibold text-lg text-white">Navigation</span>
                   <button 
                     onClick={() => setIsSidebarOpen(false)}
-                    className="p-1.5 rounded-md hover:bg-white/10 text-zinc-400 cursor-pointer flex items-center justify-center"
+                    className="p-2 rounded-xl hover:bg-white/10 text-white/60 hover:text-white cursor-pointer flex items-center justify-center transition-colors"
                   >
                     ✕
                   </button>
