@@ -40,13 +40,14 @@ export async function updateSession(request: NextRequest) {
     // Session invalid/expired - treat as unauthenticated
   }
 
-  if (
-    !user &&
-    !request.nextUrl.pathname.startsWith('/login') &&
-    !request.nextUrl.pathname.startsWith('/auth') &&
-    !request.nextUrl.pathname.startsWith('/onboarding')
-  ) {
-    // no user, potentially respond by redirecting the user to the login page
+  const isPublicRoute =
+    request.nextUrl.pathname === '/' ||
+    request.nextUrl.pathname.startsWith('/login') ||
+    request.nextUrl.pathname.startsWith('/auth') ||
+    request.nextUrl.pathname.startsWith('/onboarding')
+
+  if (!user && !isPublicRoute) {
+    // no user, redirect to login page for protected dashboard routes
     const url = request.nextUrl.clone()
     url.pathname = '/auth/login'
     return NextResponse.redirect(url)
