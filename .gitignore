@@ -43,3 +43,8 @@ next-env.d.ts
 # diagnostic test scripts
 test-email.js
 
+# databases
+*.db
+*.sqlite
+*.db-journal
+
